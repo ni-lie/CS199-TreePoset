@@ -1,14 +1,15 @@
-input = [1234, 1243, 4321, 3214, 2314, 2142, 1432]
+def GroupInputLinearOrders(input):
+    # convert the list of int to list of strings
+    input = [str(item) for item in input]
+    subgroup = [ [] for i in range(len(str(input[0])))]
 
-# convert the list of int to list of strings
-input = [str(item) for item in input]
+    for i in range(len(input)):
+        subgroup[int(input[i][0])-1].append(int(input[i]))
+    
+    for item in subgroup:
+        item.sort()
+    return subgroup
 
-subgroup = [ [] for i in range(len(str(input[0])))]
+linearOrders = [1234, 1243, 4321, 3214, 2314, 2142, 1432]
+print(GroupInputLinearOrders(linearOrders))
 
-for i in range(len(input)):
-    subgroup[int(input[i][0])-1].append(int(input[i]))
-
-for item in subgroup:
-    item.sort()
-
-print(subgroup)
