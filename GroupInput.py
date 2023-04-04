@@ -8,4 +8,7 @@ subgroup = [ [] for i in range(len(str(input[0])))]
 for i in range(len(input)):
     subgroup[int(input[i][0])-1].append(int(input[i]))
 
+for item in subgroup:
+    item.sort()
+
 print(subgroup)
