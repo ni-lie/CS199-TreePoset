@@ -37,4 +37,7 @@ def rankInverse(index, linearOrder):
     return linearOrder[index]
 
 inputLinearOrders = [[1234, 1243, 1432], [2142, 2314], [3214], [4321]]
-print(OneTreePoset(inputLinearOrders))
+
+P = OneTreePoset(inputLinearOrders)
+for i in range(len(P)):
+    print('P'+str(i+1)+':', P[i])
