@@ -9,18 +9,30 @@ def group(inputLinearOrder):
     n = len(inputLinearOrder[0])
 
     # Let A0 = {v}, A1 = ancestor(v, P), A2 = descendant(v, P), A3 = incomparable(v, P)
-    for i in range(1,n):
-        v = inputLinearOrder[0][i]
-        c1 = inputLinearOrder[0][:i] 
-        for j in range(i+1, n):
-            if(j!=n-1):
-                c2 = inputLinearOrder[0][i+1:j+1]
-                c3 = inputLinearOrder[0][j+1:]
-            # elif j == n-1:
-            else:
-                c2 = inputLinearOrder[0][i+1:n]
-                c3 = ''
-            #  l1 = (C1, v, C2, C3), l2 = (C1, v, C3, C2) and l3 = (C1, C3, v, C2).
+    for linearOrder in inputLinearOrder:
+        for i in range(1,n):
+            v = linearOrder[i]
+            c1 = linearOrder[:i] 
+            for j in range(i+1, n):
+                if(j!=n-1):
+                    c2 = linearOrder[i+1:j+1]
+                    c3 = linearOrder[j+1:]
+                # elif j == n-1:
+                else:
+                    c2 = linearOrder[i+1:n]
+                    c3 = ''
+                #  l1 = (C1, v, C2, C3), l2 = (C1, v, C3, C2) and l3 = (C1, C3, v, C2).
+                l1 = c1+v+c2+c3
+                l2 = c1+v+c3+c2
+                l3 = c1+c3+v+c2
+
+                print(l1)
+                print(l2)
+                print(l3)
+                print('\n')
+                
+            c2 = ''
+            c3 = linearOrder[i+1:n]
             l1 = c1+v+c2+c3
             l2 = c1+v+c3+c2
             l3 = c1+c3+v+c2
@@ -29,17 +41,6 @@ def group(inputLinearOrder):
             print(l2)
             print(l3)
             print('\n')
-            
-        c2 = ''
-        c3 = inputLinearOrder[0][i+1:n]
-        l1 = c1+v+c2+c3
-        l2 = c1+v+c3+c2
-        l3 = c1+c3+v+c2
-
-        print(l1)
-        print(l2)
-        print(l3)
-        print('\n')
 
 # inputLinearOrders = [1234, 1243, 1423] 
 # inputLinearOrders = [1324, 1342, 1432] 
@@ -52,4 +53,4 @@ def group(inputLinearOrder):
 
 inputLinearOrders = [1234, 1243, 1432, 1423, 1342, 1324] 
 
-group(inputLinearOrders)
+group(sorted(inputLinearOrders))
