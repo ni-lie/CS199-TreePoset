@@ -76,6 +76,7 @@ def findSubgroup(inputLinearOrders):
                             covered.append(x)
     
     # checks pairs of uncovered elements -- check if the pair differs by one adjacent transpo graph
+    # if this is true: put the pair in a single list
     for x in inputLinearOrders:
         for y in inputLinearOrders:
             if x not in covered and y not in covered and x!=y:
