@@ -1,7 +1,5 @@
 # Lemma 5
 
-import copy #https://stackoverflow.com/questions/37895718/appending-to-a-list-in-recursive-function?rq=1#:~:text=2-,import%20copy,-arr%20%3D%20%5B1
-
 setofPosets = []
 
 def group(inputLinearOrder):
@@ -29,10 +27,6 @@ def group(inputLinearOrder):
                 l2 = c1+v+c3+c2
                 l3 = c1+c3+v+c2
                 
-                # print(l1)
-                # print(l2)
-                # print(l3)
-                # print('\n')
                 # check if l1,l2,l3 are distinct
                 li = [l1,l2,l3]
                 li.sort()
@@ -59,11 +53,11 @@ def group(inputLinearOrder):
 # inputLinearOrders = [1324, 1342, 1432] 
 
 # -----------------------------------
-# inputLinearOrders = [1234, 1243, 1342, 1423, 1432] 
+inputLinearOrders = [1234, 1243, 1342, 1423, 1432] 
 # G1: (1234, 1243, 1423) - should be covered by one tree poset
 # uncovered = 1342, 1432
 # -----------------------------------
 
-inputLinearOrders = [1234, 1243, 1432, 1423, 1342, 1324] 
+# inputLinearOrders = [1234, 1243, 1432, 1423, 1342, 1324] 
 
 group(sorted(inputLinearOrders))
