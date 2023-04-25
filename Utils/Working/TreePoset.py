@@ -24,9 +24,13 @@ def TreePoset(inputLinearOrders):
 # inputLinearOrders = [1234, 1243, 1423, 1432] 
 # inputLinearOrders = [1234] 
 # inputLinearOrders = [1234, 1243, 1342, 1423, 1432]  
+# inputLinearOrders = [1234, 1243, 1423, 4123, 4132]
 
-# WRONG TEST CASES SO FAR
-inputLinearOrders = [1234, 1243, 1432, 1423, 1342, 1324] # only one tree poset covers this but outputs two posets since findSubgroup outputs two subgroups; can be combined??
+# CORRECT BUT NOT OPTIMAL
+# inputLinearOrders = [1234, 1243, 1432, 1423, 1342, 1324] # only one tree poset covers this but outputs two posets since findSubgroup outputs two subgroups; can be combined??
+
+# wrong test cases
+inputLinearOrders = [123456, 123465]
 
 inputLinearOrders.sort()
 inputLinearOrders = [str(item) for item in inputLinearOrders]
