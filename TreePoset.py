@@ -1,11 +1,14 @@
-import Utils as util
+import sys
+sys.path.append('Utils')
+
 import OneTreePoset as otp
+import TreePoset_Utils as tpu
 
 setOfPosets = []
 
 def TreePoset(inputLinearOrders):
     # 1. determine the subgroups
-    inputWithSubgroups = util.findSubgroup(inputLinearOrders)
+    inputWithSubgroups = tpu.findSubgroup(inputLinearOrders)
     # print(inputWithSubgroups)
 
     # 2. perform OneTreePoset for each subgroups then append the result to setOfPosets
