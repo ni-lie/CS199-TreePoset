@@ -60,8 +60,8 @@ def VERIFY(LP, upsilon):
 
 # inputLinearOrders = [1234, 1243, 1432] # correct
 # inputLinearOrders = [1234, 1243, 1423] # correct
-# inputLinearOrders = [1234, 1243, 1432, 1423] # correct
-inputLinearOrders = [1234, 1243, 1342, 1423, 1432]  
+inputLinearOrders = [1234, 1243, 1432, 1423] # correct
+# inputLinearOrders = [1234, 1243, 1342, 1423, 1432]  # wrong so far
 # inputLinearOrders = [1234, 1243, 1432, 1423, 1342, 1324] # correct
 
 OneTreePoset(sorted(inputLinearOrders))
