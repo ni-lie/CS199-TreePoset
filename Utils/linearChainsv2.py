@@ -13,28 +13,34 @@ def get_chains(v, l):
 
     # for elements that have rank > rank(v): the element can either be a (1) descendant or (2) incomparable:
     n = len(l)
-    # A2 = descendant
-    # A3 = not in A1 and A2
+        # A2 = descendant
+        # A3 = not in A1 and A2
+    C1 = ''.join(A1)
     for d in range(rank(v,l)+1, n):
         A2 = [rankInverse(x,l) for x in range(d,n)]
         A3 = [x for x in l if (x!=v) and (x not in A1) and (x not in A2)]
-        print('v:', v)
-        print('A1:',A1)
-        print('A2:',A2)
-        print('A3:',A3)
+
+        C2 = ''.join(A2)
+        C3 = ''.join(A3)
+        l1 = C1 + v + C2 + C3
+        l2 = C1 + v + C3 + C2
+        l3 = C1 + C3 + v + C2
+
+        print('l1: '+ l1 + ' ' + 'l2: '+ l2 +' ' + 'l3: '+ l3 +'\n')
         
-    # A2 = not in A1 and A3
-    # A3 = incomparable
+        # A2 = not in A1 and A3
+        # A3 = incomparable
     for d in range(rank(v,l)+1, n):
         A3 = [rankInverse(x,l) for x in range(d,n)]
         A2 = [x for x in l if (x!=v) and (x not in A1) and (x not in A3)]
+    
+        C2 = ''.join(A2)
+        C3 = ''.join(A3)
+        l1 = C1 + v + C2 + C3
+        l2 = C1 + v + C3 + C2
+        l3 = C1 + C3 + v + C2
 
-    # A2 = [x for x in l if x!=v and rank(x,l) > rank(v,l)]
-    # A3 = [x for x in l if x!=v and (x not in A1) and (x not in A2)]
-        print('v:', v)
-        print('A1:',A1)
-        print('A2:',A2)
-        print('A3:',A3)
+        print('l1: '+ l1 + ' ' + 'l2: '+ l2 +' ' + 'l3: '+ l3 +'\n')
 
 
 
