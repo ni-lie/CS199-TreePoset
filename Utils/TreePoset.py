@@ -1,7 +1,9 @@
 import linearChainsv2 as lc
 import OneTreePoset as otp
 
-def subgroup(inputLinearOrders):
+setOfPosets = []
+
+def findSubgroup(inputLinearOrders):
     group = []
     covered = []
     for linearOrder in inputLinearOrders:
@@ -28,7 +30,7 @@ def subgroup(inputLinearOrders):
     # checks all unconvered elements and append it to group
     for x in inputLinearOrders:
         if x not in covered:
-            group.append(x)
+            group.append([x])
 
     return group
 
@@ -36,30 +38,29 @@ def subgroup(inputLinearOrders):
 
 def TreePoset(inputLinearOrders):
     # 1. determine the subgroups
-    inputWithSubgroups = subgroup(inputLinearOrders)
-
+    inputWithSubgroups = findSubgroup(inputLinearOrders)
     # print(inputWithSubgroups)
 
-    # 2. perform OneTreePoset for each subgroups (if inputWithSubgroups contain only subgroups, can they be covered by a single tree poset? hmmm)   
+    # 2. perform OneTreePoset for each subgroups then append the result to setOfPosets
+    for item in inputWithSubgroups:
+        poset = otp.OneTreePoset(item)
+        setOfPosets.append(poset)
 
+    # 3. return/print the list of TreePosets
+    for i in range(len(setOfPosets)):
+        print('P'+str(i+1)+':', setOfPosets[i])
 
-    # m = len(inputLinearOrders)
-    # n = len(inputLinearOrders[0])
+   
 
-    # minRank = [0 for i in range(n)]
-    # numCoverRelation = 0
-    # coverRelationP = []
+# CORRECT TEST CASES SO FAR
+# inputLinearOrders = [1234, 1243, 1423] 
+# inputLinearOrders = [1234, 1243, 1423, 1432] 
+# inputLinearOrders = [1234] 
+# inputLinearOrders = [1234, 1243, 1342, 1423, 1432]  
 
-    # 3. collect TreePosets in a list
+# WRONG TEST CASES SO FAR
+inputLinearOrders = [1234, 1243, 1432, 1423, 1342, 1324] # only one tree poset covers this but outputs two posets since findSubgroup outputs two subgroups; can be combined??
 
-    # 4. return/print the list of TreePosets
-
-
-# inputLinearOrders = [1234, 1243, 1432] # correct
-# inputLinearOrders = [1234, 1243, 1423] # correct
-# inputLinearOrders = [1234, 1243, 1432, 1423] # correct
-# inputLinearOrders = [1234, 1243, 1342, 1423, 1432]  # correct
-inputLinearOrders = [1234, 1243, 1432, 1423, 1342, 1324] # correct
 inputLinearOrders.sort()
 inputLinearOrders = [str(item) for item in inputLinearOrders]
 TreePoset(inputLinearOrders)
