@@ -1,11 +1,11 @@
-import linearChainsv2 as lc
+import Utils as util
 import OneTreePoset as otp
 
 setOfPosets = []
 
 def TreePoset(inputLinearOrders):
     # 1. determine the subgroups
-    inputWithSubgroups = lc.findSubgroup(inputLinearOrders)
+    inputWithSubgroups = util.findSubgroup(inputLinearOrders)
     # print(inputWithSubgroups)
 
     # 2. perform OneTreePoset for each subgroups then append the result to setOfPosets
