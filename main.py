@@ -24,6 +24,7 @@ def TreePoset(inputLinearOrders):
 
 # CORRECT TEST CASES SO FAR
 # inputLinearOrders = [1234, 1243, 1423] 
+# inputLinearOrders = [1324, 1342, 1432, 1234] 
 # inputLinearOrders = [1234, 1243, 1423, 1432] 
 # inputLinearOrders = [1234] 
 # inputLinearOrders = [1234, 1243, 1342, 1423, 1432]  
@@ -31,10 +32,10 @@ def TreePoset(inputLinearOrders):
 # inputLinearOrders = [123456, 123465]
 # inputLinearOrders = [123456, 123465, 132465, 134265, 134256]
 
-# CORRECT BUT NOT OPTIMAL
-# now correct! but need to verify the algo with ma'am ivy
-inputLinearOrders = [1234, 1243, 1432, 1423, 1342, 1324] # only one tree poset covers this but outputs two posets since findSubgroup outputs two subgroups; can be combined??
-
+# CORRECT BUT NOT OPTIMAL TEST CASES
+# now correct and optimal! but need to verify the algo with ma'am ivy
+# inputLinearOrders = [1234, 1243, 1432, 1423, 1342, 1324] # only one tree poset covers this but outputs two posets since findSubgroup outputs two subgroups; can be combined??
+inputLinearOrders = [1234, 1243, 1432, 1423, 1342, 1324, 2134, 2143, 2314, 2341, 2413, 2431]
 
 inputLinearOrders.sort()
 inputLinearOrders = [str(item) for item in inputLinearOrders]
