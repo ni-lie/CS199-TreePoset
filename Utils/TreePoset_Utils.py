@@ -7,6 +7,7 @@ def rankInverse(index, linearOrder):
 def rank(v, linearOrder):
     return linearOrder.index(v)
 
+# Lemma 5
 def get_LinearChains(v, l):
     generatedLinearExtensions = []
     # Let A0 = {v}, A1 = ancestor(v, P), A2 = descendant(v, P), A3 = incomparable(v, P)

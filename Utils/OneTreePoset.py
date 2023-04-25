@@ -1,4 +1,4 @@
-import Utils as util
+import TreePoset_Utils as tpu
 
 def OneTreePoset(linearOrder):
     # m = number of linear orders; n = length of Vertex set
@@ -10,9 +10,9 @@ def OneTreePoset(linearOrder):
 
     for i in range(1,n):
         for j in range(m):
-            v2 = util.rankInverse(i, linearOrder[j])
+            v2 = tpu.rankInverse(i, linearOrder[j])
             if minRank[int(v2)-1] == 0:
-                v1 = util.rankInverse(i-1, linearOrder[j])
+                v1 = tpu.rankInverse(i-1, linearOrder[j])
                 coverRelationP.append((int(v1),int(v2)))
                 minRank[int(v2)-1] = i
                 minRank[int(v1)-1] = i-1
