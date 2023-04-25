@@ -15,6 +15,7 @@ class Poset:
                     else:                                   #if current pair = (u, v), append vertex u to adjList[v]
                         poset.adjList[v-1].append(pair[0])
 
+allTopologicalOrders = [] #initialize list of all topological orders
 #Recursive function to find all topological orderings of a given DAG
 def findAllTopologicalOrders(poset, path, discovered, N):  #algorithm based on https://www.geeksforgeeks.org/all-topological-sorts-of-a-directed-acyclic-graph/
     # do for every vertex
@@ -53,10 +54,13 @@ def findAllTopologicalOrders(poset, path, discovered, N):  #algorithm based on h
         print(path)
 
 def printAllTopologicalOrders(poset):
+    #get number of nodes in the graph
     N = len(poset.vertices)
+
+    #create an auxuiliary space to keep track of whether vertex is discov ered
     discovered = [False] * N
+
+    #list to store the topological order
     path = []
     findAllTopologicalOrders(poset, path, discovered, N)
 
-P = Poset((1,2,3,4,5), [(1,2), (1,3), (2,4), (3,5)])  
-printAllTopologicalOrders(P)
