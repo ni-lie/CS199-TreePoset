@@ -1,5 +1,6 @@
 import linearChainsv2 as lc
-import 
+import OneTreePoset as otp
+
 def subgroup(inputLinearOrders):
     group = []
     covered = []
