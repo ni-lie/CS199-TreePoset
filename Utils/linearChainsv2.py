@@ -53,11 +53,11 @@ def get_LinearChains(v, l):
 
 
 # inputLinearOrders = [1234, 1243, 1342, 1423, 1432] 
-inputLinearOrders = [1234]
-inputLinearOrders = [str(item) for item in inputLinearOrders] # converts list of int to list of str
+# inputLinearOrders = [1234]
+# inputLinearOrders = [str(item) for item in inputLinearOrders] # converts list of int to list of str
 
-for linearOrder in inputLinearOrders:
-    for i in range(1, len(linearOrder)):
-        v = rankInverse(i, linearOrder)
-        get_LinearChains(v, linearOrder)
+# for linearOrder in inputLinearOrders:
+#     for i in range(1, len(linearOrder)):
+#         v = rankInverse(i, linearOrder)
+#         get_LinearChains(v, linearOrder)
 
