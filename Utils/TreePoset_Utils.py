@@ -74,7 +74,16 @@ def findSubgroup(inputLinearOrders):
                     # append each element in subgroup to coveredLinearOrders
                         for x in subgroup:
                             covered.append(x)
-                    
+    
+    # checks pairs of uncovered elements -- check if the pair differs by one adjacent transpo graph
+    for x in inputLinearOrders:
+        for y in inputLinearOrders:
+            if x not in covered and y not in covered and x!=y:
+                if x == y[:-2] + y[-1] + y[-2]:
+                    group.append([x,y])
+                    covered.append(x)
+                    covered.append(y)
+            
 
     # checks all unconvered elements and append it to group
     for x in inputLinearOrders:
