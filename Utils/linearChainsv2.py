@@ -51,6 +51,36 @@ def get_LinearChains(v, l):
     
     return generatedLinearExtensions
 
+def findSubgroup(inputLinearOrders):
+    group = []
+    covered = []
+    for linearOrder in inputLinearOrders:
+        for i in range(1, len(linearOrder)):
+            v = rankInverse(i, linearOrder)
+            generatedLinearExtensions = get_LinearChains(v, linearOrder)
+
+            for subgroup in generatedLinearExtensions:
+                shouldAppend = True
+                # check if subgroup is a subset of inputLinearOrders
+                if set(subgroup).issubset(set(inputLinearOrders)):
+                    # if at least one element in subgroup is already covered, do not append it to group
+                    for ele in subgroup:
+                        if ele in covered:
+                            shouldAppend = False
+                            break
+                    if shouldAppend:
+                        group.append(subgroup)
+                    # append each element in subgroup to coveredLinearOrders
+                        for x in subgroup:
+                            covered.append(x)
+                    
+
+    # checks all unconvered elements and append it to group
+    for x in inputLinearOrders:
+        if x not in covered:
+            group.append([x])
+
+    return group
 
 # inputLinearOrders = [1234, 1243, 1342, 1423, 1432] 
 # inputLinearOrders = [1234]
