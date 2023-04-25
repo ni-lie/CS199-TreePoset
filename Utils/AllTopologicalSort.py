@@ -24,7 +24,7 @@ class Graph:
  
 # Recursive function to find
 # all topological orderings of a given DAG
-def findAllTopologicalOrders(graph, path, discovered, N):
+def findAllTopologicalOrders(graph, path, discovered, N, topologicalSort):
     # do for every vertex
     
     for v in range(N):
@@ -44,7 +44,7 @@ def findAllTopologicalOrders(graph, path, discovered, N):
             discovered[v] = True
  
             # recur
-            findAllTopologicalOrders(graph, path, discovered, N)
+            findAllTopologicalOrders(graph, path, discovered, N, topologicalSort)
  
             # backtrack: reset in-degree
             # information for the current node
@@ -60,11 +60,11 @@ def findAllTopologicalOrders(graph, path, discovered, N):
     # all vertices are included in the path
     if len(path) == N:
         # print(path)
-        topologicalSort.extend(path)
+        topologicalSort.append(path)
 
  
 # Print all topological orderings of a given DAG
-def printAllTopologicalOrders(graph):
+def printAllTopologicalOrders(graph,topologicalSort):
  
     # get number of nodes in the graph
     N = len(graph.adjList)
@@ -76,14 +76,13 @@ def printAllTopologicalOrders(graph):
     path = []
     
     # find all topological ordering and print them
-    findAllTopologicalOrders(graph, path, discovered, N)
+    findAllTopologicalOrders(graph, path, discovered, N, topologicalSort)
  
 # Driver code
 if __name__ == '__main__':
  
     # List of graph edges as per above diagram
     edges = [(1, 2), (1, 4), (2, 3)]
-    # edges = [(0, 1), (0, 3), (1, 2)]
     # Number of nodes in the graph
     N = 4
  
@@ -91,7 +90,7 @@ if __name__ == '__main__':
     graph = Graph(edges, N)
  
     # print all topological ordering of the graph
-    printAllTopologicalOrders(graph)
+    printAllTopologicalOrders(graph, topologicalSort)
 
-    topologicalSort = [[topologicalSort[i]+1 for i in range(N*j, N*j+N)] for j in range(3)]
+    # topologicalSort = [[topologicalSort[i]+1 for i in range(N*j, N*j+N)] for j in range(3)]
     print(topologicalSort)
