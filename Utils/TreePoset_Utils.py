@@ -1,3 +1,5 @@
+import math
+
 # This function returns the element v in V such that rank(v, l) = r.
 def rankInverse(index, linearOrder):
     # sample input: index = 3; linearOrder = 1234; 
@@ -55,6 +57,16 @@ def get_LinearChains(v, l):
 def findSubgroup(inputLinearOrders):
     group = []
     covered = []
+    #--------------------------- (VERIFY THIS with ma'am ivy) ---------------------------
+    # m = number of linear orders; n = length of a linear order
+    # if (n-1)! == m, the inputLinearOrder can be covered by a single tree poset; see leveled poset definition
+    m = len(inputLinearOrders)
+    n = len(inputLinearOrders[0])
+    if(math.factorial(n-1) == m):
+        group.append(inputLinearOrders)
+        return group
+    # -------------------------------------------------------------------
+
     for linearOrder in inputLinearOrders:
         for i in range(1, len(linearOrder)):
             v = rankInverse(i, linearOrder)
@@ -75,7 +87,7 @@ def findSubgroup(inputLinearOrders):
                         for x in subgroup:
                             covered.append(x)
     
-    # checks pairs of uncovered elements -- check if the pair differs by one adjacent transpo graph
+    # checks pairs of uncovered elements -- check if the pair differs by one adjacent transpo graph AT THE TAIL
     # if this is true: put the pair in a single list
     for x in inputLinearOrders:
         for y in inputLinearOrders:
@@ -85,7 +97,6 @@ def findSubgroup(inputLinearOrders):
                     covered.append(x)
                     covered.append(y)
             
-
     # checks all unconvered elements and append it to group
     for x in inputLinearOrders:
         if x not in covered:
