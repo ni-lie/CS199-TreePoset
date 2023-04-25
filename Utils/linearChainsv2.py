@@ -48,7 +48,8 @@ def get_chains(v, l):
         if (l1 != l2) and (l1 != l3) and (l2 != l3):
             generatedLinearExtensions.append([l1,l2,l3])
             # print('l1: '+ l1 + ' ' + 'l2: '+ l2 +' ' + 'l3: '+ l3 +'\n')
-
+    
+    return generatedLinearExtensions
 
 
 # inputLinearOrders = [1234, 1243, 1342, 1423, 1432] 
