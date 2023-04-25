@@ -1,3 +1,5 @@
+import math
+
 # This function returns the element v in V such that rank(v, l) = r.
 def rankInverse(index, linearOrder):
     # sample input: index = 3; linearOrder = 1234; 
@@ -52,9 +54,42 @@ def get_LinearChains(v, l):
     
     return generatedLinearExtensions
 
+# this functions return a list cointaining distinct root/first element of a linear order
+def findProbableMinimumPosets(inputLinearOrders):
+    set_distinct = set()
+    for linearOrder in inputLinearOrders:
+        set_distinct.add(linearOrder[0])
+
+    return list(set_distinct)
+
+
 def findSubgroup(inputLinearOrders):
     group = []
     covered = []
+
+    # find list containing distinct root
+    distinctRoots = findProbableMinimumPosets(inputLinearOrders)
+
+    #--------------------------- (VERIFY THIS with ma'am ivy) ---------------------------
+    # m = number of linear orders; n = length of a linear order
+    # if (n-1)! == m, the inputLinearOrder can be covered by a single tree poset; see leveled poset definition    
+    m = len(inputLinearOrders)
+    n = len(inputLinearOrders[0])
+    for i in range(len(distinctRoots)):
+        if(m >= math.factorial(n-1)):
+            for linearOrder in inputLinearOrders:
+                if distinctRoots[i] == linearOrder[i]:
+                    if len(group) == 0:
+                        group.append([linearOrder])
+                    else: # elif len(group) <= i
+                        group[i].append(linearOrder)
+                    covered.append(linearOrder)
+
+    # if(math.factorial(n-1) == m):
+    #     group.append(inputLinearOrders)
+    #     return group
+    # -------------------------------------------------------------------
+
     for linearOrder in inputLinearOrders:
         for i in range(1, len(linearOrder)):
             v = rankInverse(i, linearOrder)
@@ -74,8 +109,17 @@ def findSubgroup(inputLinearOrders):
                     # append each element in subgroup to coveredLinearOrders
                         for x in subgroup:
                             covered.append(x)
-                    
-
+    
+    # checks pairs of uncovered elements -- check if the pair differs by one adjacent transpo graph AT THE TAIL
+    # if this is true: put the pair in a single list
+    for x in inputLinearOrders:
+        for y in inputLinearOrders:
+            if x not in covered and y not in covered and x!=y:
+                if x == y[:-2] + y[-1] + y[-2]:
+                    group.append([x,y])
+                    covered.append(x)
+                    covered.append(y)
+            
     # checks all unconvered elements and append it to group
     for x in inputLinearOrders:
         if x not in covered:
