@@ -54,17 +54,40 @@ def get_LinearChains(v, l):
     
     return generatedLinearExtensions
 
+# this functions return a list cointaining distinct root/first element of a linear order
+def findProbableMinimumPosets(inputLinearOrders):
+    set_distinct = set()
+    for linearOrder in inputLinearOrders:
+        set_distinct.add(linearOrder[0])
+
+    return list(set_distinct)
+
+
 def findSubgroup(inputLinearOrders):
     group = []
     covered = []
+
+    # find list containing distinct root
+    distinctRoots = findProbableMinimumPosets(inputLinearOrders)
+
     #--------------------------- (VERIFY THIS with ma'am ivy) ---------------------------
     # m = number of linear orders; n = length of a linear order
-    # if (n-1)! == m, the inputLinearOrder can be covered by a single tree poset; see leveled poset definition
+    # if (n-1)! == m, the inputLinearOrder can be covered by a single tree poset; see leveled poset definition    
     m = len(inputLinearOrders)
     n = len(inputLinearOrders[0])
-    if(math.factorial(n-1) == m):
-        group.append(inputLinearOrders)
-        return group
+    for i in range(len(distinctRoots)):
+        if(m >= math.factorial(n-1)):
+            for linearOrder in inputLinearOrders:
+                if distinctRoots[i] == linearOrder[i]:
+                    if len(group) == 0:
+                        group.append([linearOrder])
+                    else: # elif len(group) <= i
+                        group[i].append(linearOrder)
+                    covered.append(linearOrder)
+
+    # if(math.factorial(n-1) == m):
+    #     group.append(inputLinearOrders)
+    #     return group
     # -------------------------------------------------------------------
 
     for linearOrder in inputLinearOrders:

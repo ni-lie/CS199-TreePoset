@@ -32,6 +32,7 @@ def TreePoset(inputLinearOrders):
 # inputLinearOrders = [123456, 123465, 132465, 134265, 134256]
 
 # CORRECT BUT NOT OPTIMAL
+# now correct! but need to verify the algo with ma'am ivy
 inputLinearOrders = [1234, 1243, 1432, 1423, 1342, 1324] # only one tree poset covers this but outputs two posets since findSubgroup outputs two subgroups; can be combined??
 
 
