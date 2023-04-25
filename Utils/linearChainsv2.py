@@ -8,6 +8,7 @@ def rank(v, linearOrder):
     return linearOrder.index(v)
 
 def get_chains(v, l):
+    generatedLinearExtensions = []
     # Let A0 = {v}, A1 = ancestor(v, P), A2 = descendant(v, P), A3 = incomparable(v, P)
     A1 = [x for x in l if x!=v and rank(x,l) < rank(v,l)]
 
@@ -28,7 +29,8 @@ def get_chains(v, l):
 
         # check if l1, l2, and l3 are distinct
         if (l1 != l2) and (l1 != l3) and (l2 != l3):
-            print('l1: '+ l1 + ' ' + 'l2: '+ l2 +' ' + 'l3: '+ l3 +'\n')
+            generatedLinearExtensions.append([l1,l2,l3])
+            # print('l1: '+ l1 + ' ' + 'l2: '+ l2 +' ' + 'l3: '+ l3 +'\n')
         
         # A2 = not in A1 and A3
         # A3 = incomparable
@@ -44,7 +46,8 @@ def get_chains(v, l):
 
         # check if l1, l2, and l3 are distinct
         if (l1 != l2) and (l1 != l3) and (l2 != l3):
-            print('l1: '+ l1 + ' ' + 'l2: '+ l2 +' ' + 'l3: '+ l3 +'\n')
+            generatedLinearExtensions.append([l1,l2,l3])
+            # print('l1: '+ l1 + ' ' + 'l2: '+ l2 +' ' + 'l3: '+ l3 +'\n')
 
 
 
