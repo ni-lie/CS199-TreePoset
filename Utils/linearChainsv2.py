@@ -26,7 +26,9 @@ def get_chains(v, l):
         l2 = C1 + v + C3 + C2
         l3 = C1 + C3 + v + C2
 
-        print('l1: '+ l1 + ' ' + 'l2: '+ l2 +' ' + 'l3: '+ l3 +'\n')
+        # check if l1, l2, and l3 are distinct
+        if (l1 != l2) and (l1 != l3) and (l2 != l3):
+            print('l1: '+ l1 + ' ' + 'l2: '+ l2 +' ' + 'l3: '+ l3 +'\n')
         
         # A2 = not in A1 and A3
         # A3 = incomparable
@@ -40,7 +42,9 @@ def get_chains(v, l):
         l2 = C1 + v + C3 + C2
         l3 = C1 + C3 + v + C2
 
-        print('l1: '+ l1 + ' ' + 'l2: '+ l2 +' ' + 'l3: '+ l3 +'\n')
+        # check if l1, l2, and l3 are distinct
+        if (l1 != l2) and (l1 != l3) and (l2 != l3):
+            print('l1: '+ l1 + ' ' + 'l2: '+ l2 +' ' + 'l3: '+ l3 +'\n')
 
 
 
