@@ -24,7 +24,7 @@ def OneTreePoset(linearOrder):
 
 
 
-inputLinearOrders = ['1243', '1234', '1324']
-inputLinearOrders.sort()
-P = OneTreePoset(inputLinearOrders)
-print("P0:", P)
+# inputLinearOrders = ['1243', '1234', '1324']
+# inputLinearOrders.sort()
+# P = OneTreePoset(inputLinearOrders)
+# print("P0:", P)

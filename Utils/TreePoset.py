@@ -1,5 +1,5 @@
 import linearChainsv2 as lc
-
+import 
 def subgroup(inputLinearOrders):
     group = []
     covered = []
@@ -41,6 +41,7 @@ def TreePoset(inputLinearOrders):
 
     # 2. perform OneTreePoset for each subgroups (if inputWithSubgroups contain only subgroups, can they be covered by a single tree poset? hmmm)   
 
+
     # m = len(inputLinearOrders)
     # n = len(inputLinearOrders[0])
 
@@ -57,7 +58,7 @@ def TreePoset(inputLinearOrders):
 # inputLinearOrders = [1234, 1243, 1423] # correct
 # inputLinearOrders = [1234, 1243, 1432, 1423] # correct
 # inputLinearOrders = [1234, 1243, 1342, 1423, 1432]  # correct
-inputLinearOrders = [1234, 1243, 1432, 1423, 1342, 1324] # wrong, so far
+inputLinearOrders = [1234, 1243, 1432, 1423, 1342, 1324] # correct
 inputLinearOrders.sort()
 inputLinearOrders = [str(item) for item in inputLinearOrders]
 TreePoset(inputLinearOrders)
