@@ -51,7 +51,9 @@ def findAllTopologicalOrders(poset, path, discovered, N):  #algorithm based on h
     #print the topological order if
     #all vertices are included in the path
     if len(path) == N:
-        print(path)
+        for v in path:
+            print(v, end="")
+        print(", ", end="")
 
 def printAllTopologicalOrders(poset):
     #get number of nodes in the graph
@@ -63,4 +65,5 @@ def printAllTopologicalOrders(poset):
     #list to store the topological order
     path = []
     findAllTopologicalOrders(poset, path, discovered, N)
+    print("\n")
 
