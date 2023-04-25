@@ -7,7 +7,7 @@ def rankInverse(index, linearOrder):
 def rank(v, linearOrder):
     return linearOrder.index(v)
 
-def get_chains(v, l):
+def get_LinearChains(v, l):
     generatedLinearExtensions = []
     # Let A0 = {v}, A1 = ancestor(v, P), A2 = descendant(v, P), A3 = incomparable(v, P)
     A1 = [x for x in l if x!=v and rank(x,l) < rank(v,l)]
@@ -59,5 +59,5 @@ inputLinearOrders = [str(item) for item in inputLinearOrders] # converts list of
 for linearOrder in inputLinearOrders:
     for i in range(1, len(linearOrder)):
         v = rankInverse(i, linearOrder)
-        get_chains(v, linearOrder)
+        get_LinearChains(v, linearOrder)
 
