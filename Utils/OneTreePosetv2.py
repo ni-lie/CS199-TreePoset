@@ -1,6 +1,7 @@
 import linearChainsv2 as lc
 
 def OneTreePoset(linearOrder):
+    # m = number of linear orders; n = length of Vertex set
     m = len(linearOrder)     
     n = len(linearOrder[0])
     minRank = [0 for i in range(n)]
