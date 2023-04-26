@@ -79,7 +79,7 @@ def findSubgroup(inputLinearOrders):
         if(m >= math.factorial(n-1)):
             for linearOrder in inputLinearOrders:
                 if distinctRoots[i] == linearOrder[0] and linearOrder not in covered:
-                    if len(group) < i+1 and linearOrder:
+                    if len(group) < i+1:
                         group.append([linearOrder])
                     else: # elif len(group) <= i
                         group[i].append(linearOrder)
