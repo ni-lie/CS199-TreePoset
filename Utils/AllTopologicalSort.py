@@ -9,6 +9,7 @@ class Poset:
             poset.adjList[u-1].append(v)                    #append v in adjacency list of u
             poset.adjList[v-1].append(u)                    #append u in adjacency list of v 
             poset.indegree[v-1] = poset.indegree[v-1] + 1   #increase indegree of v by 1
+        poset.linearExtensions = []                         #All Topological Orders will be stored on the propert linearExtension
 
 allTopologicalOrders = [] #initialize list of all topological orders
 #Recursive function to find all topological orderings of a given DAG
@@ -43,14 +44,15 @@ def findAllTopologicalOrders(poset, path, discovered, N):  #algorithm based on h
             path.pop()
             discovered[v-1] = False
 
-    #print the topological order if
+    #store the topological order on poset.linearExtensions if
     #all vertices are included in the path
     if len(path) == N:
+        LinearExtension = ''
         for v in path:
-            print(v, end="")
-        print(", ", end="")
+            LinearExtension = LinearExtension + str(v)
+        poset.linearExtensions.append(LinearExtension)
 
-def printAllTopologicalOrders(poset):
+def AllTopologicalOrders(poset):
     #get number of nodes in the graph
     N = len(poset.vertices)
 
@@ -60,4 +62,6 @@ def printAllTopologicalOrders(poset):
     #list to store the topological order
     path = []
     findAllTopologicalOrders(poset, path, discovered, N)
-    print("\n")
+    
+    #return all LinearExtensions(Topological Orders)
+    return poset.linearExtensions
