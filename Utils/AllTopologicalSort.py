@@ -4,16 +4,11 @@ class Poset:
         poset.vertices = vertices                           #list of vertices
         poset.cover_relations = cover_relations             #list of tuples containing all cover relations
         poset.indegree = [0] * len(vertices)                #initializing list contaning indegree values (either 0 or 1) of each vertex 
-        for edge in cover_relations:                        #for each edge: (u, v) in cover_relations
-            poset.indegree[edge[1] - 1] = 1                 #set indegree of v to 1
         poset.adjList = [[] for v in range(len(vertices))]  #initialize list of adjacent lists for each vertex
-        for v in range(len(vertices)):                      #for each vertex, find all adjacent elements
-            for pair in cover_relations:                    #check if current vertex is in current pair
-                if v in pair:
-                    if pair[0] == v:                        #if current pair = (v, u), append vertex u to adjList[v]
-                        poset.adjList[v-1].append(pair[1])  
-                    else:                                   #if current pair = (u, v), append vertex u to adjList[v]
-                        poset.adjList[v-1].append(pair[0])
+        for (u,v) in cover_relations:                       #for each pair in cover_relations
+            poset.adjList[u-1].append(v)                    #append v in adjacency list of u
+            poset.adjList[v-1].append(u)                    #append u in adjacency list of v 
+            poset.indegree[v-1] = poset.indegree[v-1] + 1   #increase indegree of v by 1
 
 allTopologicalOrders = [] #initialize list of all topological orders
 #Recursive function to find all topological orderings of a given DAG
@@ -66,4 +61,3 @@ def printAllTopologicalOrders(poset):
     path = []
     findAllTopologicalOrders(poset, path, discovered, N)
     print("\n")
-

@@ -44,9 +44,10 @@ inputLinearOrders = [str(item) for item in inputLinearOrders]
 TreePoset(inputLinearOrders)
 
 #Testing AllTopologicalSort
-P1 = Poset((1,2,3,4), [(1,2), (1,3), (1,4)]) 
+P1 = Poset((1,2,3), [(1,2), (1,3)]) 
 P2 = Poset((1,2,3,4), [(2,1), (2,3), (2,4)]) 
 print("AllTopologicalOrders for P1: ")
+
 ats.printAllTopologicalOrders(P1)
 print("AllTopologicalOrders for P2: ")
 ats.printAllTopologicalOrders(P2)
