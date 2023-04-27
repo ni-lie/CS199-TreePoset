@@ -4,6 +4,7 @@ sys.path.append('Utils')
 import OneTreePoset as otp
 import TreePoset_Utils as tpu
 import AllTopologicalSort as ats
+import Verify as verify
 from AllTopologicalSort import Poset
 
 setOfPosets = []
@@ -44,9 +45,10 @@ inputLinearOrders = [str(item) for item in inputLinearOrders]
 TreePoset(inputLinearOrders)
 
 #Testing AllTopologicalSort
-P1 = Poset((1,2,3, 4), [(1,2), (1,3), (1,4)]) 
+P1 = Poset((1,2,3,4), [(1,2), (1,3), (1,4)]) 
 P2 = Poset((1,2,3,4), [(2,1), (2,3), (2,4)]) 
 L_P1 = ats.AllTopologicalOrders(P1)
 L_P2 = ats.AllTopologicalOrders(P2)
 print("AllTopologicalOrders for P1: ", L_P1)
 print("AllTopologicalOrders for P2: ", L_P2)
+print("VERIFY((P1,P2), Upsilon):", verify.Verify([P1, P2], inputLinearOrders))
