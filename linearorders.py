@@ -33,4 +33,4 @@ for setOfLinOrder in lst:
 
 output.close()
 
-print(f"Generated all linear order sets of {args[0]} with {args[1]} vertices")
+print(f"Generated all tree linear order sets with {args[1]} vertices")
