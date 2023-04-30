@@ -1,6 +1,14 @@
+"""
 # source: songsong and angeles
 # generate input linear orders
-# python linearorders.py <vertex count*> 
+----------- TO RUN -----------------
+python linearorders.py <vertex count*> 
+
+where <vertex count*> = {3, 4, 5, 6}
+
+"""
+
+
 import os, sys
 sys.path.append('Utils')
 from Input_Utils import generateRootedRelations, isAllConnected
