@@ -29,7 +29,7 @@ for root in vertices:
 lst = [Poset(args[1], relations).generateLinearExtensions() for relations in rels]
 output = open(f"inputs/{args[1]}.txt", "w")
 for setOfLinOrder in lst:
-    output.write(str([''.join(map(str, linOrder)) for linOrder in setOfLinOrder]) + "\n")
+    output.write(str([int(''.join(map(str, linOrder))) for linOrder in setOfLinOrder]) + "\n")
 
 output.close()
 
