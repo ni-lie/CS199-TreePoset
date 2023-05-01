@@ -21,6 +21,7 @@ if not os.path.exists("outputs/"):
 
 def TreePoset(inputLinearOrders):
     setOfPosets = []
+    linear_extensions = []
     # 1. determine the subgroups
     inputWithSubgroups = tpu.findSubgroup(inputLinearOrders)
     # print(inputWithSubgroups)
@@ -30,9 +31,20 @@ def TreePoset(inputLinearOrders):
         poset = otp.OneTreePoset(item)
         setOfPosets.append(poset)
 
-    # 3. return/print the list of TreePosets
+    # 3. VERIFY(P;Y) 
+    for poset in setOfPosets:
+        linear_extension = tpu.get_linear_extensions(poset)
+        linear_extensions.extend(linear_extension)
+
+    if tpu.VERIFY(linear_extensions, inputLinearOrders):
+        return setOfPosets
     
-    return setOfPosets
+    return None
+
+
+
+    # 3. return/print the list of TreePosets
+    # return setOfPosets
 
 with open(f'inputs/{args[1]}.txt', 'r') as input_file, open(f'outputs/output_{args[1]}.txt', 'w') as output_file:
     for line in input_file:
@@ -41,11 +53,13 @@ with open(f'inputs/{args[1]}.txt', 'r') as input_file, open(f'outputs/output_{ar
         inputLinearOrders = [str(item) for item in inputLinearOrders]
         output_file.write(f"Input: {inputLinearOrders}\n")
         posets = TreePoset(inputLinearOrders)
-        for i in range(len(posets)):
-            output_file.write(f"P{str(i+1)}: {posets[i]}\n")
-        output_file.write("\n")
+        if posets != None:
+            for i in range(len(posets)):
+                output_file.write(f"P{str(i+1)}: {posets[i]}\n")
+            output_file.write("\n")
 
-print(f"Generated all output of input linear order sets with {args[1]} vertices")
-print("Check 'output' directory")
+if posets != None:
+    print(f"Generated all output of input linear order sets with {args[1]} vertices")
+    print("Check 'output' directory")
 
 

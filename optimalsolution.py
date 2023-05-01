@@ -10,9 +10,8 @@ def linear_extensions(cover_relation):
     sortings = list(nx.all_topological_sorts(G))
     
     # Convert each sorting to a string and return the list of all sortings
-    return [''.join(map(str, sorting)) for sorting in sortings]
+    return sorted([''.join(map(str, sorting)) for sorting in sortings])
 
 cover_relation = [(1, 2), (1, 4), (2, 3)]
-cover_relation = [(1, 2), (1, 3), (1, 4)]
 extensions = linear_extensions(cover_relation)
-print(sorted(extensions))
+print(extensions)

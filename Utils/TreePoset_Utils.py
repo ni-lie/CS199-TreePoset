@@ -1,4 +1,5 @@
 import math
+import networkx as nx
 
 # This function returns the element v in V such that rank(v, l) = r.
 def rankInverse(index, linearOrder):
@@ -133,15 +134,20 @@ def findSubgroup(inputLinearOrders):
 
     return group
 
-# inputLinearOrders = [1234, 1243, 1342, 1423, 1432] 
-# inputLinearOrders = [1234]
-# inputLinearOrders = [1234, 1243, 1432, 1423, 1342, 1324]
-# inputLinearOrders.sort()
-# inputLinearOrders = [str(item) for item in inputLinearOrders] # converts list of int to list of str
+def get_linear_extensions(cover_relation):
+    # Create a directed graph from the cover relation
+    G = nx.DiGraph()
+    for a, b in cover_relation:
+        G.add_edge(a, b)
+    
+    # Compute all possible topological sortings (i.e., linear extensions) of the graph
+    sortings = list(nx.all_topological_sorts(G))
+    
+    # Convert each sorting to a string and return the list of all sortings
+    return sorted([''.join(map(str, sorting)) for sorting in sortings])
 
-# for linearOrder in inputLinearOrders:
-#     for i in range(1, len(linearOrder)):
-#         v = rankInverse(i, linearOrder)
-#         l_ext = get_LinearChains(v, linearOrder)
-#         for item in l_ext:
-#             print(sorted(item))
+# VERIFY(P;Y) - this function returns TRUE if L(P) = Y
+def VERIFY(P, Y):
+    if sorted(P) == sorted(Y):
+        return True
+    return False
