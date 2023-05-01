@@ -61,7 +61,7 @@ def findProbableMinimumPosets(inputLinearOrders):
     for linearOrder in inputLinearOrders:
         set_distinct.add(linearOrder[0])
 
-    return list(set_distinct)
+    return sorted(list(set_distinct))
 
 
 def findSubgroup(inputLinearOrders):
