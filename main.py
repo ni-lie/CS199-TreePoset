@@ -41,8 +41,6 @@ def TreePoset(inputLinearOrders):
     
     return None
 
-
-
     # 3. return/print the list of TreePosets
     # return setOfPosets
 
@@ -51,9 +49,10 @@ with open(f'inputs/{args[1]}.txt', 'r') as input_file, open(f'outputs/output_{ar
         inputLinearOrders = [int(x) for x in line.strip('[]\n').split(',')]
         inputLinearOrders.sort()
         inputLinearOrders = [str(item) for item in inputLinearOrders]
-        output_file.write(f"Input: {inputLinearOrders}\n")
+
         posets = TreePoset(inputLinearOrders)
         if posets != None:
+            output_file.write(f"Input: {inputLinearOrders}\n")
             for i in range(len(posets)):
                 output_file.write(f"P{str(i+1)}: {posets[i]}\n")
             output_file.write("\n")
@@ -61,5 +60,6 @@ with open(f'inputs/{args[1]}.txt', 'r') as input_file, open(f'outputs/output_{ar
 if posets != None:
     print(f"Generated all output of input linear order sets with {args[1]} vertices")
     print("Check 'output' directory")
-
+else:
+    print("Generated nothing")
 
