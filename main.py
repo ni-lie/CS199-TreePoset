@@ -41,8 +41,6 @@ def TreePoset(inputLinearOrders):
     
     return None
 
-    # 3. return/print the list of TreePosets
-    # return setOfPosets
 
 with open(f'inputs/{args[1]}.txt', 'r') as input_file, open(f'outputs/output_{args[1]}.txt', 'w') as output_file:
     for line in input_file:
