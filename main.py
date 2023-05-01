@@ -1,12 +1,27 @@
+"""
+----------- TO RUN -----------------
+python main.py <vertex count*> 
+
+where <vertex count*> = {3, 4, 5, 6}
+
+"""
+
 import sys
 sys.path.append('Utils')
 
 import OneTreePoset as otp
 import TreePoset_Utils as tpu
+import ast, sys, os 
 
-setOfPosets = []
+args = sys.argv
+
+if not os.path.exists("outputs/"):
+    os.makedirs("outputs/")
+
 
 def TreePoset(inputLinearOrders):
+    setOfPosets = []
+    linear_extensions = []
     # 1. determine the subgroups
     inputWithSubgroups = tpu.findSubgroup(inputLinearOrders)
     # print(inputWithSubgroups)
@@ -16,27 +31,33 @@ def TreePoset(inputLinearOrders):
         poset = otp.OneTreePoset(item)
         setOfPosets.append(poset)
 
-    # 3. return/print the list of TreePosets
-    for i in range(len(setOfPosets)):
-        print('P'+str(i+1)+':', setOfPosets[i])
+    # 3. VERIFY(P;Y) 
+    for poset in setOfPosets:
+        linear_extension = tpu.get_linear_extensions(poset)
+        linear_extensions.extend(linear_extension)
 
-   
+    if tpu.VERIFY(linear_extensions, inputLinearOrders):
+        return setOfPosets
+    
+    return None
 
-# CORRECT TEST CASES SO FAR
-# inputLinearOrders = [1234, 1243, 1423] 
-inputLinearOrders = [1324, 1342, 1432, 1234] 
-# inputLinearOrders = [1234, 1243, 1423, 1432] 
-# inputLinearOrders = [1234] 
-# inputLinearOrders = [1234, 1243, 1342, 1423, 1432]  
-# inputLinearOrders = [1234, 1243, 1423, 4123, 4132]
-# inputLinearOrders = [123456, 123465]
-# inputLinearOrders = [123456, 123465, 132465, 134265, 134256]
 
-# CORRECT BUT NOT OPTIMAL TEST CASES
-# now correct and optimal! but need to verify the algo with ma'am ivy
-# inputLinearOrders = [1234, 1243, 1432, 1423, 1342, 1324] # only one tree poset covers this but outputs two posets since findSubgroup outputs two subgroups; can be combined??
-# inputLinearOrders = [1234, 1243, 1432, 1423, 1342, 1324, 2134, 2143, 2314, 2341, 2413, 2431]
+with open(f'inputs/{args[1]}.txt', 'r') as input_file, open(f'outputs/output_{args[1]}.txt', 'w') as output_file:
+    for line in input_file:
+        inputLinearOrders = [int(x) for x in line.strip('[]\n').split(',')]
+        inputLinearOrders.sort()
+        inputLinearOrders = [str(item) for item in inputLinearOrders]
 
-inputLinearOrders.sort()
-inputLinearOrders = [str(item) for item in inputLinearOrders]
-TreePoset(inputLinearOrders)
+        posets = TreePoset(inputLinearOrders)
+        if posets != None:
+            output_file.write(f"Input: {inputLinearOrders}\n")
+            for i in range(len(posets)):
+                output_file.write(f"P{str(i+1)}: {posets[i]}\n")
+            output_file.write("\n")
+
+if posets != None:
+    print(f"Generated all output of input linear order sets with {args[1]} vertices")
+    print("Check 'output' directory")
+else:
+    print("Generated nothing")
+
