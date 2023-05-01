@@ -86,11 +86,14 @@ def findSubgroup(inputLinearOrders):
                         group[i].append(linearOrder)
                     covered.append(linearOrder)
 
-    sum_covered = 0
-    for item in group:
-        sum_covered+=len(item)
-    if sum_covered == m:
+    if len(covered) == m: 
         return group
+
+    # sum_covered = 0
+    # for item in group:
+    #     sum_covered+=len(item)
+    # if sum_covered == m:
+    #     return group
 
     # if(math.factorial(n-1) == m):
     #     group.append(inputLinearOrders)
