@@ -49,6 +49,7 @@ with open(f'inputs/{args[1]}.txt', 'r') as input_file, open(f'outputs/output_{ar
         inputLinearOrders = [str(item) for item in inputLinearOrders]
 
         posets = TreePoset(inputLinearOrders)
+        print
         if posets != None:
             output_file.write(f"Input: {inputLinearOrders}\n")
             for i in range(len(posets)):
