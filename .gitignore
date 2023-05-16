@@ -6,3 +6,4 @@ outputs/
 optimalsol/
 inputs/
 .vscode/
+__pycache__
