@@ -128,7 +128,46 @@ def combinePoset(P1, P2):
     return None
 
 def combinePosetv2(P1, P2):
-    P3 = Poset() 
+    P3 = getDifference(P1, P2)
+    P4 = getDifference(P2, P1)
+
+    if len(P1) == len(P2):
+        if len(P3) != 1 or len(P4) != 1:
+            return None
+        
+        P3_ele = P3[0]
+        P4_ele = P4[0]
+        a, b = P3_ele[0], P3_ele[1]
+        c, d = P4_ele[0], P4_ele[1]
+
+        if a != d or b != c:
+            return None
+        
+        P = getDifference(P1, P3)
+        return P
+
+    elif len(P3) > 1 and len(P4) > 1:
+        return None
+    
+    else:
+        if len(P3) == 1:
+            P3_ele = P3[0]
+            a, b = P3_ele[0], P3_ele[1]
+
+            if (b, a) not in P4:
+                return None
+            elif set(P1.remove((a, b))).issubset(set(P2.remove((b, a)))):
+                P = getDifference(P1, P3)
+                return P
+        elif len(P4) == 1:
+            P4_ele = P4[0]
+            a, b = P4_ele[0], P4_ele[1]
+
+            if (b, a) not in P3:
+                return None
+            elif set(P2.remove((a, b))).issubset(set(P1.remove((b, a)))):
+                P = getDifference(P1, P3)
+                return P 
 
     
 
