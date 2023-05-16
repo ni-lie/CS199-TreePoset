@@ -1,6 +1,6 @@
 import sys
 sys.path.append('Utils')
-from TreePoset_Utils_v2 import linear_order_to_binary_relation, binaryRelation, combinePosetv2
+from TreePoset_Utils_v2 import binaryRelation, combinePosetv2
 
 
 def TreePoset(upsilon):
@@ -46,13 +46,12 @@ input_linear_order = [1234, 1243, 1324, 1342, 1423]
 # input_linear_order = ['12345', '12354', '12435', '13245', '13254', '13524', '14253', '14523', '14532', '15342', '15423', '15432']
 
 
-
 input_linear_order = [str(item) for item in input_linear_order]
 input_linear_order.sort()
 Pstar = binaryRelation(input_linear_order)
 
 # run TreePoset
-# result = TreePoset(poset)
+# result = TreePoset(Pstar)
 
 # for i in range(len(result)):
 #     print(f"P{str(i+1)}: {result[i]}")

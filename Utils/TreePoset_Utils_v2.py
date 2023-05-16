@@ -6,8 +6,8 @@ def binaryRelation(input):
     P = []
     for linear_order in input:
         binaryRel = linear_order_to_binary_relation(linear_order)
-        poset = Poset(binaryRel, linear_order)
-        P.append(poset)
+        # poset = Poset(binaryRel, linear_order)
+        P.append(binaryRel)
     return P
 
 # given a linear order, get its corresponding binary relation
@@ -128,7 +128,7 @@ def combinePoset(P1, P2):
     return None
 
 def combinePosetv2(P1, P2):
-    
+    P3 = Poset() 
 
     
 
