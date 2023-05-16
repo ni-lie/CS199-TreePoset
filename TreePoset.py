@@ -50,8 +50,6 @@ input_linear_order = [str(item) for item in input_linear_order]
 input_linear_order.sort()
 Pstar = binaryRelation(input_linear_order)
 
-for item in Pstar:
-    print(item)
 # run TreePoset
 # result = TreePoset(poset)
 
