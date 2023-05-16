@@ -128,6 +128,9 @@ def combinePoset(P1, P2):
     return None
 
 def combinePosetv2(P1, P2):
+    # check first if same root
+    if getRoot(P1) == getRoot(P2):
+        return None
     P3 = getDifference(P1, P2)
     P4 = getDifference(P2, P1)
 
@@ -178,6 +181,8 @@ def combinePosetv2(P1, P2):
             elif set(P2_temp).issubset(set(P1_temp)):
                 P = getDifference(P1, P3)
                 return P 
+            
+            
 
     
 
