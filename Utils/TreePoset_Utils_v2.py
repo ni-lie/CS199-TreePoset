@@ -8,12 +8,14 @@ def linear_order_to_binary_relation(order):
     for i in range(n):
         for j in range(i+1, n):
             relation.append((int(order[i]), int(order[j])))
+    relation = sorted(relation, key=lambda x: (x[0], x[1]))  # Sort the relation in ascending order
     return relation
 
-    # Example usage:
-    # order = '12345'
-    # relation = linear_order_to_binary_relation(order)
-    # print(relation)
+
+# Example usage:
+# order = '14235'
+# relation = linear_order_to_binary_relation(order)
+# print(relation)
 
 
 def get_linear_extensions(cover_relation):
