@@ -123,8 +123,9 @@ def combinePoset(P1, P2):
             return P
     # if isTreePoset(P):
     return None
-    
+
 def combinePosetv2(P1, P2):
+    
     
 
 
