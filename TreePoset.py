@@ -1,62 +1,11 @@
 import sys
 sys.path.append('Utils')
+from TreePoset_Utils_v2 import linear_order_to_binary_relation 
 
-import TreePoset_Utils_v2 as util
+# import TreePoset_Utils_v2 as util
 
 def TreePoset(P):
-    setPoset = P.copy()
-    covered = []
-    isCombined = False
-    m = len(P)
 
-    Y = []
-    # get maximal poset 
-    common_binary_rel = set(setPoset[0]).intersection(*setPoset[1:])
-    # get Y or upsilon
-    for binaryRel in setPoset:
-        Y.append(''.join(util.get_linear_extensions(binaryRel)))
-
-    # if L(P) == Y: return
-    if set(util.get_linear_extensions(list(common_binary_rel))) == set(Y):
-        return [list(common_binary_rel)]
-
-    for i in range(m):
-        for j in range(i+1, m):
-            combined = util.combinePoset(P[i], P[j])
-            # if P_i and P_j can be combined
-            if combined != None and P[i] not in covered and P[j] not in covered:
-                # check if L(i) U L(j) = L(combined)
-                LE_Pi = util.get_linear_extensions(P[i])
-                LE_Pj = util.get_linear_extensions(P[j])
-                LE_combined = util.get_linear_extensions(combined)
-
-                if set(LE_Pi).union(set(LE_Pj)) == set(LE_combined):
-                    # append covered linear orders to covered
-                    covered.append(P[i])
-                    covered.append(P[j])
-                    
-                    # remove from setPoset P_i and P_j
-                    setPoset.remove(P[i])
-                    setPoset.remove(P[j])
-
-                    # append to setPoset the combined poset
-                    setPoset.append(combined)
-
-                    combined = None     # reset
-                    isCombined = True
-    if isCombined == False:
-        return setPoset
-    # print(setPoset)
-    setPoset = TreePoset(setPoset)
-    return setPoset
-
-# gets binary relation for each linear order
-def binaryRelation(input):
-    P = []
-    for linear_order in input:
-        binaryRel = util.linear_order_to_binary_relation(linear_order)
-        P.append(binaryRel)
-    return P
 
 
 # CORRECT TEST CASES

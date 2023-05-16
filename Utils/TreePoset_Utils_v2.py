@@ -1,4 +1,13 @@
 import networkx as nx
+# gets binary relation for each linear order
+def binaryRelation(input):
+    P = []
+    for linear_order in input:
+        binaryRel = linear_order_to_binary_relation(linear_order)
+        P.append(binaryRel)
+    return P
+
+# given a linear order, get its corresponding binary relation
 def linear_order_to_binary_relation(order):
     """
     Takes a linear order as input and returns its binary relation as a list of tuples.
@@ -10,7 +19,6 @@ def linear_order_to_binary_relation(order):
             relation.append((int(order[i]), int(order[j])))
     relation = sorted(relation, key=lambda x: (x[0], x[1]))  # Sort the relation in ascending order
     return relation
-
 
 # Example usage:
 # order = '14235'
