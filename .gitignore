@@ -1,1 +1,6 @@
 Utils/__pycache__/
+Utils/delete.py
+outputs/
+optimalsol/
+inputs/
+.vscode/

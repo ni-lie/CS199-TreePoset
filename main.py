@@ -49,12 +49,14 @@ with open(f'inputs/{args[1]}.txt', 'r') as input_file, open(f'outputs/output_{ar
         inputLinearOrders = [str(item) for item in inputLinearOrders]
 
         posets = TreePoset(inputLinearOrders)
-        print
         if posets != None:
             output_file.write(f"Input: {inputLinearOrders}\n")
             for i in range(len(posets)):
                 output_file.write(f"P{str(i+1)}: {posets[i]}\n")
             output_file.write("\n")
+        else:
+            output_file.write(f"Input: {inputLinearOrders}\n")
+            output_file.write("None!!!!!\n\n")
 
 if posets != None:
     print(f"Generated all output of input linear order sets with {args[1]} vertices")

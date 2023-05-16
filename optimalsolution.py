@@ -12,6 +12,10 @@ def linear_extensions(cover_relation):
     # Convert each sorting to a string and return the list of all sortings
     return sorted([''.join(map(str, sorting)) for sorting in sortings])
 
-cover_relation = [(1, 2), (1, 4), (2, 3)]
+cover_relation = [(1, 2), (1, 3), (1, 4), (1, 5), (2, 4), (3, 5)]
+extensions = linear_extensions(cover_relation)
+print(extensions)
+
+cover_relation = [(1, 2), (1, 3), (1, 4), (1, 5), (4, 2), (5, 3)]
 extensions = linear_extensions(cover_relation)
 print(extensions)

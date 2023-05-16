@@ -149,6 +149,21 @@ def get_linear_extensions(cover_relation):
     # Convert each sorting to a string and return the list of all sortings
     return sorted([''.join(map(str, sorting)) for sorting in sortings])
 
+# cr = [(1, 2), (1, 3), (1, 4), (2, 3), (2, 4)]
+# cr1 = [(1, 2), (1, 3), (1, 4), (2, 3), (4, 2), (4, 3)]
+# cr2 = [(1, 2), (1, 3), (1, 4), (2, 3)]
+# cr = [(1, 2), (1, 3), (1, 4), (1, 5), (2, 3), (2, 4), (3, 5)]
+# cr1 = [(1, 2), (1, 3), (1, 4), (1, 5), (3, 2), (2, 4), (3, 5)]
+# cr2 = [(1, 2), (1, 3), (1, 4), (1, 5), (2, 4), (3, 5)]
+# temp = []
+# temp.append(cr)
+# temp.append(cr1)
+# temp.append(cr2)
+# for item in temp:
+#     LE = get_linear_extensions(item)
+#     print("# of linear extensions:", len(LE))
+#     print(LE)
+
 # VERIFY(P;Y) - this function returns TRUE if L(P) = Y
 def VERIFY(P, Y):
     if sorted(P) == sorted(Y):
