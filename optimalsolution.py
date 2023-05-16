@@ -1,3 +1,11 @@
+"""
+----------- TO RUN -----------------
+python optimalsolution.py <vertex count*> trees
+
+where <vertex count*> = {3, 4, 5, 6}
+
+"""
+
 import os, sys
 from itertools import combinations
 import networkx as nx
