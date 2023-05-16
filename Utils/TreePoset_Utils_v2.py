@@ -1,6 +1,7 @@
 import networkx as nx
 from classes import Poset
-# gets binary relation for each linear order
+
+# creates an object/class Poset for each linear order
 def binaryRelation(input):
     P = []
     for linear_order in input:
