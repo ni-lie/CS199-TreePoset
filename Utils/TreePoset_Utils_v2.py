@@ -129,7 +129,7 @@ def combinePoset(P1, P2):
 
 def combinePosetv2(P1, P2):
     # check first if same root
-    if getRoot(P1) == getRoot(P2):
+    if getRoot(P1) != getRoot(P2):
         return None
     P3 = getDifference(P1, P2)
     P4 = getDifference(P2, P1)
