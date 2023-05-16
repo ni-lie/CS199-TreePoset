@@ -1,5 +1,5 @@
 import networkx as nx
-class Poset:
+class Poset():
     def __init__(self, binaryRel, linearOrder):
         self.binaryRel = binaryRel
         self.linearOrder = linearOrder

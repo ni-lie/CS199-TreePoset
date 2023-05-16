@@ -2,6 +2,7 @@ import sys
 sys.path.append('Utils')
 from TreePoset_Utils_v2 import linear_order_to_binary_relation, binaryRelation, combinePosetv2
 
+
 def TreePoset(upsilon):
     Pstar = upsilon
     Ptree = []
