@@ -7,7 +7,7 @@ class Poset:
     def getLinearExtensions(self):
         # Create a directed graph from the cover relation
         G = nx.DiGraph()
-        for a, b in cover_relation:
+        for a, b in self.binaryRel:
             G.add_edge(a, b)
         
         # Compute all possible topological sortings (i.e., linear extensions) of the graph
