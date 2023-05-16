@@ -1,5 +1,5 @@
 import networkx as nx
-from classes import Poset
+# from classes import Poset
 
 # creates an object/class Poset for each linear order
 def binaryRelation(input):
@@ -154,18 +154,28 @@ def combinePosetv2(P1, P2):
             P3_ele = P3[0]
             a, b = P3_ele[0], P3_ele[1]
 
+            P1_temp = P1.copy()
+            P2_temp = P2.copy()
+            P1_temp.remove((a, b))
+            P2_temp.remove((b, a))
+
             if (b, a) not in P4:
                 return None
-            elif set(P1.remove((a, b))).issubset(set(P2.remove((b, a)))):
+            elif set(P1_temp).issubset(set(P2_temp)):
                 P = getDifference(P1, P3)
                 return P
         elif len(P4) == 1:
             P4_ele = P4[0]
             a, b = P4_ele[0], P4_ele[1]
 
+            P1_temp = P1.copy()
+            P2_temp = P2.copy()
+            P1_temp.remove((b, a))
+            P2_temp.remove((a, b))
+
             if (b, a) not in P3:
                 return None
-            elif set(P2.remove((a, b))).issubset(set(P1.remove((b, a)))):
+            elif set(P2_temp).issubset(set(P1_temp)):
                 P = getDifference(P1, P3)
                 return P 
 
@@ -193,7 +203,9 @@ def combinePosetv2(P1, P2):
 # P1 = [(1, 2), (1, 3), (1, 4), (2, 3), (2, 4)]
 # P2 = [(1, 2), (1, 3), (1, 4), (2, 4), (3, 2), (3, 4)]
 
-# p = combinePoset(P1, P2)
+# P1 = [(1, 2), (1, 3), (1, 4), (1, 5), (2, 3), (2, 4), (2, 5), (3, 5)]
+# P2 = [(1, 2), (1, 3), (1, 4), (1, 5), (2, 4), (3, 2), (3, 4), (3, 5)]
+# p = combinePosetv2(P1, P2)
 # if p != None:
 #     print(p)
 # else:

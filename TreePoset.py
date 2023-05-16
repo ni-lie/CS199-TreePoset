@@ -1,6 +1,6 @@
 import sys
 sys.path.append('Utils')
-from TreePoset_Utils_v2 import binaryRelation, combinePosetv2
+from TreePoset_Utils_v2 import binaryRelation, combinePoset
 
 
 def TreePoset(upsilon):
@@ -16,7 +16,7 @@ def TreePoset(upsilon):
             Pstar.pop(0)
             hasPair = False
             for i in range(len(Pstar)):
-                combinedposet = combinePosetv2(poset1, Pstar[i])
+                combinedposet = combinePoset(poset1, Pstar[i])
                 if combinedposet != None:
                     Ptree.append(combinedposet)
                     Pstar.pop(i)
@@ -30,11 +30,11 @@ def TreePoset(upsilon):
         Pstar = Ptree.copy()
         Ptree = []
 
-    return Ptree
+    return Pstar
 
 
 # CORRECT TEST CASES
-input_linear_order = [1234, 1243, 1324, 1342, 1423, 1432]
+# input_linear_order = [1234, 1243, 1324, 1342, 1423, 1432]
 input_linear_order = [1234, 1243, 1324, 1342, 1423]
 
 # WRONG TEST CASES
@@ -44,6 +44,7 @@ input_linear_order = [1234, 1243, 1324, 1342, 1423]
 
 # current test case
 # input_linear_order = ['12345', '12354', '12435', '13245', '13254', '13524', '14253', '14523', '14532', '15342', '15423', '15432']
+# input_linear_order = ['12345', '12354', '12435', '13245', '13254', '13524']
 
 
 input_linear_order = [str(item) for item in input_linear_order]
@@ -51,8 +52,8 @@ input_linear_order.sort()
 Pstar = binaryRelation(input_linear_order)
 
 # run TreePoset
-# result = TreePoset(Pstar)
+result = TreePoset(Pstar)
 
-# for i in range(len(result)):
-#     print(f"P{str(i+1)}: {result[i]}")
+for i in range(len(result)):
+    print(f"P{str(i+1)}: {result[i]}")
 
