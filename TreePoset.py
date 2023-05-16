@@ -1,6 +1,6 @@
 import sys
 sys.path.append('Utils')
-from TreePoset_Utils_v2 import binaryRelation, combinePoset
+from TreePoset_Utils_v2 import binaryRelation, combinePoset, get_linear_extensions
 
 
 def TreePoset(upsilon):
@@ -17,7 +17,7 @@ def TreePoset(upsilon):
             hasPair = False
             for i in range(len(Pstar)):
                 combinedposet = combinePoset(poset1, Pstar[i])
-                if combinedposet != None:
+                if combinedposet != None:       ## need to add condition such that L(combinedposet) == L(poset1) U L(Pstar[i])
                     Ptree.append(combinedposet)
                     Pstar.pop(i)
                     hasPair = True
