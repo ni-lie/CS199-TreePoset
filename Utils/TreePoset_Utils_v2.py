@@ -1,10 +1,12 @@
 import networkx as nx
+from classes import Poset
 # gets binary relation for each linear order
 def binaryRelation(input):
     P = []
     for linear_order in input:
         binaryRel = linear_order_to_binary_relation(linear_order)
-        P.append(binaryRel)
+        poset = Poset(binaryRel, linear_order)
+        P.append(poset)
     return P
 
 # given a linear order, get its corresponding binary relation
