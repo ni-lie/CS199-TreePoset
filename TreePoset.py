@@ -7,7 +7,7 @@ where <vertex count*> = {3, 4, 5, 6}
 """
 import sys, os
 sys.path.append('Utils')
-from TreePoset_Utils_v2 import binaryRelation, combinePosetv2, get_linear_extensions
+from TreePoset_Utils_v2 import binaryRelation, combinePosetv2, get_linear_extensions, gen_poset
 
 args = sys.argv
 
