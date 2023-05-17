@@ -184,6 +184,12 @@ def combinePosetv2(P1, P2):
             
 # OneTreePoset function
 def gen_tree_poset(upsilon):
+    roots = []
+    for linearOrder in upsilon:
+        roots.append(linearOrder[0])
+    if len(set(roots)) > 1:
+        return None
+    
     # m = number of linear orders; n = length of Vertex set
     m = len(upsilon)     
     n = len(upsilon[0])
@@ -204,9 +210,8 @@ def gen_tree_poset(upsilon):
             break
     
     P = get_linear_extensions(coverRelationP)
-    Y = get_linear_extensions(Y)
 
-    if VERIFY(P, Y):
+    if VERIFY(P, upsilon):
         return coverRelationP
     
     return None
@@ -219,6 +224,14 @@ def VERIFY(P, Y):
 def rankInverse(index, linearOrder):
     # sample input: index = 3; linearOrder = 1234; 
     return linearOrder[index]       # output: 4
+
+
+# Y = ['1234', '1243']
+
+# P = gen_tree_poset(Y)
+
+# if P != None:
+#     print(P)
 
 # P1 = [(1, 2), (1, 3), (1, 4), (2, 3), (2, 4), (3, 4)]
 # P2 = [(1, 2), (1, 4), (1, 3), (2, 4), (2, 3), (4, 3)]
