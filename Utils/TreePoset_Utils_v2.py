@@ -193,9 +193,9 @@ def gen_tree_poset(upsilon):
 
     for i in range(1,n):
         for j in range(m):
-            v2 = tpu.rankInverse(i, upsilon[j])
+            v2 = rankInverse(i, upsilon[j])
             if minRank[int(v2)-1] == 0:
-                v1 = tpu.rankInverse(i-1, upsilon[j])
+                v1 = rankInverse(i-1, upsilon[j])
                 coverRelationP.append((int(v1),int(v2)))
                 minRank[int(v2)-1] = i
                 minRank[int(v1)-1] = i-1
@@ -216,6 +216,9 @@ def VERIFY(P, Y):
         return True
     return False
 
+def rankInverse(index, linearOrder):
+    # sample input: index = 3; linearOrder = 1234; 
+    return linearOrder[index]       # output: 4
 
 # P1 = [(1, 2), (1, 3), (1, 4), (2, 3), (2, 4), (3, 4)]
 # P2 = [(1, 2), (1, 4), (1, 3), (2, 4), (2, 3), (4, 3)]
