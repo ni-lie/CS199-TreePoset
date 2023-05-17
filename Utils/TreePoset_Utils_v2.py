@@ -182,9 +182,21 @@ def combinePosetv2(P1, P2):
                 P = getDifference(P1, P3)
                 return P 
             
-            
+def gen_poset(upsilon):
+    if len(upsilon) == 0:
+        return None
 
-    
+    # Convert the first list to a set
+    intersection_set = set(upsilon[0])
+
+    # Find the intersection with each subsequent linearOrder
+    for linearOrder in upsilon[1:]:
+        intersection_set = intersection_set.intersection(linearOrder)
+
+    # Convert the final intersection set back to a list
+    intersection_list = list(intersection_set)
+
+    return sorted(intersection_list)
 
 
 # P1 = [(1, 2), (1, 3), (1, 4), (2, 3), (2, 4), (3, 4)]
