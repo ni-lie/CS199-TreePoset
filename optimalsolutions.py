@@ -133,7 +133,6 @@ for i in range(2, max_k + 1): #end shoud be count_one_tree_posets + 1
 if not os.path.exists("optsol/"):
     os.makedirs("optsol/")
 
-
 if not os.path.exists(f"optsol/trees/"):
     os.makedirs(f"optsol/trees/")
     
@@ -143,4 +142,15 @@ for l in lines:
     output.write(l+"\n")
 output.close()
 
-print("FINISH")
+print("FINISHED GENERATING OPTIMAL SOLUTIONS")
+
+if not os.path.exists(f"optsol/inputs/"):
+    os.makedirs(f"optsol/inputs/")
+
+output = open(f"optsol/inputs/{args[0]}treesinput.txt", "w")
+
+for LE in covered_groups_LE:
+    output.write(str(LE)+"\n")
+output.close
+
+print("FINISHED GENERATING INPUT LINEAR ORDERS")
