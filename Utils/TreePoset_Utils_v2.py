@@ -182,16 +182,28 @@ def combinePosetv2(P1, P2):
                 P = getDifference(P1, P3)
                 return P 
             
-def gen_poset(upsilon):
-    poset = list(set(upsilon[0]).intersection(*upsilon[1:]))
-    Y = []
-    for binaryRel in upsilon:
-        Y.append(''.join(get_linear_extensions(binaryRel)))
+# OneTreePoset function
+def gen_tree_poset(upsilon):
+    # m = number of linear orders; n = length of Vertex set
+    m = len(upsilon)     
+    n = len(upsilon[0])
+    minRank = [0 for i in range(n)]
+    numCoverRelation = 0
+    coverRelationP = []
 
-    if set(get_linear_extensions(poset)) == set(Y):
-        return [sorted(poset)]
-    
-    return None
+    for i in range(1,n):
+        for j in range(m):
+            v2 = tpu.rankInverse(i, upsilon[j])
+            if minRank[int(v2)-1] == 0:
+                v1 = tpu.rankInverse(i-1, upsilon[j])
+                coverRelationP.append((int(v1),int(v2)))
+                minRank[int(v2)-1] = i
+                minRank[int(v1)-1] = i-1
+                numCoverRelation +=1
+        if numCoverRelation == n-1:
+            break
+
+    return coverRelationP
 
 
 
