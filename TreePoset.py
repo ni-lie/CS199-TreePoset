@@ -43,16 +43,12 @@ def TreePoset(upsilon):
                     if VERIFY(P, upsilon[:h]):
                         Ptree.append(coverRelationP)
                         upsilon = upsilon[h:]
-                        minRank = [0 for i in range(n)]
-                        numCoverRelation = 0
-                        coverRelationP = []
                         nextset = True
-                        break
-                    else:
-                        minRank = [0 for i in range(n)]
-                        numCoverRelation = 0
-                        coverRelationP = []
-                        break
+                
+                    minRank = [0 for i in range(n)]
+                    numCoverRelation = 0
+                    coverRelationP = []
+                    break
     
     return Ptree
 
