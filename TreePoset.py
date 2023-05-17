@@ -28,7 +28,8 @@ def TreePoset(upsilon):
             hasPair = False
             for i in range(len(Pstar)):
                 combinedposet = combinePosetv2(poset1, Pstar[i])
-                if combinedposet != None and set(get_linear_extensions(combinedposet)) == set(get_linear_extensions(poset1)).union(set(get_linear_extensions(Pstar[i]))): 
+                if combinedposet != None:
+                    Ptree.append(combinedposet) 
                     Pstar.pop(i)
                     hasPair = True
                     isCombined = True
@@ -70,14 +71,14 @@ else:
 # # input_linear_order = [1234, 1243, 1324, 1342, 1423, 1432]
 # input_linear_order = [1234, 1243, 1324, 1342, 1423]
 
-# # 
-# # input_linear_order = [1234, 1324, 1423, 1432]       # returns a hammock poset (P1)
-# # input_linear_order = [1243, 1423, 1432, 4123, 4132] # haven't considered inputs with different roots
-# # input_linear_order = ['12345', '12354', '12435', '13245', '13254', '13524', '14253', '14523', '14532', '15342', '15423', '15432']     # outputs 4 posets (optimal solution: 2 posets only)
+# # # 
+# # # input_linear_order = [1234, 1324, 1423, 1432]       # returns a hammock poset (P1)
+# # # input_linear_order = [1243, 1423, 1432, 4123, 4132] # haven't considered inputs with different roots
+# # # input_linear_order = ['12345', '12354', '12435', '13245', '13254', '13524', '14253', '14523', '14532', '15342', '15423', '15432']     # outputs 4 posets (optimal solution: 2 posets only)
 
-# # current test case
-# # input_linear_order = ['12345', '12354', '12435', '13245', '13254', '13524', '14253', '14523', '14532', '15342', '15423', '15432']
-# # input_linear_order = ['12345', '12354', '12435', '13245', '13254', '13524']
+# # # current test case
+# # # input_linear_order = ['12345', '12354', '12435', '13245', '13254', '13524', '14253', '14523', '14532', '15342', '15423', '15432']
+# # # input_linear_order = ['12345', '12354', '12435', '13245', '13254', '13524']
 
 
 # input_linear_order = [str(item) for item in input_linear_order]
