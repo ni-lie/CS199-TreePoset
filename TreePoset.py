@@ -7,54 +7,79 @@ where <vertex count*> = {3, 4, 5, 6}
 """
 import sys, os
 sys.path.append('Utils')
-from TreePoset_Utils_v2 import binaryRelation, combinePosetv2, get_linear_extensions, gen_tree_poset
+from TreePoset_Utils_v2 import VERIFY, get_linear_extensions, rankInverse, group_linearOrders_by_its_root
 
 args = sys.argv
 
 if not os.path.exists("outputs/"):
     os.makedirs("outputs/")
 
-def TreePoset(upsilon, inputLinearOrders):
-    Pstar = gen_tree_poset(inputLinearOrders)
-    if Pstar != None:
-        return [Pstar]
-
-    Pstar = upsilon
+def TreePoset(upsilon):
     Ptree = []
-    isCombined = True
+    m = len(upsilon)     
+    n = len(upsilon[0])
+
+    minRank = [0 for i in range(n)]
+    numCoverRelation = 0
+    coverRelationP = []
+    nextset = False
+    canBeImproved = True
+    while canBeImproved:
+        canBeImproved = False
+        nextset = False
+        for h in range(m, 0, -1):
+            if nextset:
+                break
+            for i in range(1,n):
+                for j in range(h):
+                    v2 = rankInverse(i, upsilon[j])
+                    if minRank[int(v2)-1] == 0:
+                        v1 = rankInverse(i-1, upsilon[j])
+                        coverRelationP.append((int(v1),int(v2)))
+                        minRank[int(v2)-1] = i
+                        minRank[int(v1)-1] = i-1
+                        numCoverRelation +=1
+                if numCoverRelation == n-1:
+                    P = get_linear_extensions(coverRelationP)
+                    if VERIFY(P, upsilon[:h]):
+                        Ptree.append(coverRelationP)
+                        upsilon = upsilon[h:]
+                        if len(upsilon) > 0:
+                            m = len(upsilon)     
+                            n = len(upsilon[0])
+                        minRank = [0 for i in range(n)]
+                        numCoverRelation = 0
+                        coverRelationP = []
+                        nextset = True
+                        if len(upsilon) < 1:
+                            canBeImproved = False
+                        else:
+                            canBeImproved = True
+                        break
+                    else:
+                        minRank = [0 for i in range(n)]
+                        numCoverRelation = 0
+                        coverRelationP = []
+                        break
     
-    while isCombined:
-        isCombined = False
-
-        while len(Pstar) > 0:
-            poset1 = Pstar[0]
-            Pstar.pop(0)
-            hasPair = False
-            for i in range(len(Pstar)):
-                combinedposet = combinePosetv2(poset1, Pstar[i])
-                if combinedposet != None and set(get_linear_extensions(combinedposet)) == set(get_linear_extensions(poset1)).union(set(get_linear_extensions(Pstar[i]))):
-                    Ptree.append(combinedposet) 
-                    Pstar.pop(i)
-                    hasPair = True
-                    isCombined = True
-                    break
-            
-            if not hasPair:
-                Ptree.append(poset1)
-            
-        Pstar = Ptree.copy()
-        Ptree = []
-
-    return Pstar
+    return Ptree
 
 with open(f'inputs/{args[1]}.txt', 'r') as input_file, open(f'outputs/output_{args[1]}.txt', 'w') as output_file:
     for line in input_file:
         inputLinearOrders = [int(x) for x in line.strip('[]\n').split(',')]
         inputLinearOrders.sort()
         inputLinearOrders = [str(item) for item in inputLinearOrders]
+        
+        posets = []
+        # group linear orders according to their root
+        groupings = group_linearOrders_by_its_root(inputLinearOrders)
 
-        Pstar = binaryRelation(inputLinearOrders)
-        posets = TreePoset(Pstar, inputLinearOrders)
+        # for each group, there is a set of posets
+        # append each poset to the list posets
+        for group in groupings:
+            poset_group = TreePoset(group)
+            for poset in poset_group:
+                posets.append(poset)
 
         if posets != None:
             output_file.write(f"Input: {inputLinearOrders}\n")

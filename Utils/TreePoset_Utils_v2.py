@@ -11,62 +11,7 @@ def get_linear_extensions(cover_relation):
     
     # Convert each sorting to a string and return the list of all sortings
     return sorted([''.join(map(str, sorting)) for sorting in sortings])
-
-def gen_tree_poset(upsilon):    
-    Ptree = []
-    m = len(upsilon)     
-    n = len(upsilon[0])
-
-    minRank = [0 for i in range(n)]
-    numCoverRelation = 0
-    coverRelationP = []
-    nextset = False
-    canBeImproved = True
-    while canBeImproved:
-        canBeImproved = False
-        nextset = False
-        for h in range(m, 0, -1):
-            if nextset:
-                break
-            for i in range(1,n):
-                for j in range(h):
-                    v2 = rankInverse(i, upsilon[j])
-                    if minRank[int(v2)-1] == 0:
-                        v1 = rankInverse(i-1, upsilon[j])
-                        coverRelationP.append((int(v1),int(v2)))
-                        minRank[int(v2)-1] = i
-                        minRank[int(v1)-1] = i-1
-                        numCoverRelation +=1
-                if numCoverRelation == n-1:
-                    P = get_linear_extensions(coverRelationP)
-                    if VERIFY(P, upsilon[:h]):
-                        Ptree.append(coverRelationP)
-                        upsilon = upsilon[h:]
-                        if len(upsilon) > 0:
-                            m = len(upsilon)     
-                            n = len(upsilon[0])
-                        minRank = [0 for i in range(n)]
-                        numCoverRelation = 0
-                        coverRelationP = []
-                        nextset = True
-                        if len(upsilon) < 1:
-                            canBeImproved = False
-                        else:
-                            canBeImproved = True
-                        break
-                    else:
-                        minRank = [0 for i in range(n)]
-                        numCoverRelation = 0
-                        coverRelationP = []
-                        break
-    
-    # P = get_linear_extensions(coverRelationP)
-
-    # if VERIFY(P, upsilon):
-    return Ptree
-
-    # return None
-
+ 
 def VERIFY(P, Y):
     if sorted(P) == sorted(Y):
         return True
@@ -75,3 +20,14 @@ def VERIFY(P, Y):
 def rankInverse(index, linearOrder):
     # sample input: index = 3; linearOrder = 1234; 
     return linearOrder[index]       # output: 4
+
+def group_linearOrders_by_its_root(upsilon):
+    grouped_upsilon = {}
+    for linearOrder in upsilon:
+        root = linearOrder[0]
+        if root in grouped_upsilon:
+            grouped_upsilon[root].append(linearOrder)
+        else:
+            grouped_upsilon[root] = [linearOrder]
+    
+    return list(grouped_upsilon.values())
