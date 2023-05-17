@@ -28,7 +28,7 @@ def TreePoset(upsilon):
             hasPair = False
             for i in range(len(Pstar)):
                 combinedposet = combinePosetv2(poset1, Pstar[i])
-                if combinedposet != None:
+                if combinedposet != None and set(get_linear_extensions(combinedposet)) == set(get_linear_extensions(poset1)).union(set(get_linear_extensions(Pstar[i]))):
                     Ptree.append(combinedposet) 
                     Pstar.pop(i)
                     hasPair = True
