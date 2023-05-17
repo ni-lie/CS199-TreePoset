@@ -54,24 +54,25 @@ def getRoot(P):
 
 # returns True if poset P is a Tree Poset
 def isTreePoset(P):
-    V = getVertices(P)
-    root = getRoot(P)
+    flag = True
+    #find number of vertices
+    n = 1
+    for pair in P:
+        if max(pair) > n:
+            n = max(pair)
 
-    prec = [0 for i in range(len(V))]
-    succ = [0 for i in range(len(V))]
-
-    for i in range(len(P)):
-        prec[P[i][1] - 1] += 1
-        succ[P[i][0] - 1] += 1
+    parent = [0 for x in range(n)] #array of number of parents of a vertex
     
-    # for i in range(len(V)):
-    #     if i == root-1 and prec[i] == 0:
-    #         continue
-
-    if sum(prec) == sum(succ) and succ[root-1] > 0:
-        return True
-
-    return False
+    #store number of parents of each vertex by checking each pair in P
+    for (a,b) in P:
+        parent[b-1] += 1
+        
+    #check if a vertex has multiple parents,
+    for v in parent:
+        if (v > 1) or (0 not in parent): #if 0 not in parent, Poset possibly has a cycle
+            flag = False
+            break
+    return flag
 
     
 def combinePoset(P1, P2):
@@ -111,7 +112,9 @@ def combinePoset(P1, P2):
         if (b, a) in P3 and set(getDifference(P1, P3)) == set(getDifference(P2, P4)):
             P = getDifference(P1, P3)
             return P
-    # if isTreePoset(P):
+    if isTreePoset(P):
+        return P
+
     return None
     
     
