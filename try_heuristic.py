@@ -21,9 +21,8 @@ def gen_tree_poset(upsilon):
     numCoverRelation = 0
     coverRelationP = []
     nextset = False
-    canBeImproved = True
-    while canBeImproved:
-        canBeImproved = False
+
+    while len(upsilon) > 0:
         nextset = False
         for h in range(m, 0, -1):
             if nextset:
@@ -49,10 +48,6 @@ def gen_tree_poset(upsilon):
                         numCoverRelation = 0
                         coverRelationP = []
                         nextset = True
-                        if len(upsilon) < 1:
-                            canBeImproved = False
-                        else:
-                            canBeImproved = True
                         break
                     else:
                         minRank = [0 for i in range(n)]
@@ -77,9 +72,7 @@ def rankInverse(index, linearOrder):
     return linearOrder[index]       # output: 4
 
 input_linear_order = [1234, 1243, 1324, 1342, 1423]
-input_linear_order = [1234, 1243, 1324, 1342, 1423, 1432]
-input_linear_order = ['12345', '12354', '12435', '13245', '13254', '13524', '14253', '14523', '14532', '15342', '15423', '15432']
-input_linear_order = ['12345', '12354', '12435', '13245', '13254', '13524']
+# input_linear_order = [1234, 1243, 1324, 1342, 1423, 1432]
 
 input_linear_order = [str(item) for item in input_linear_order]
 input_linear_order.sort()

@@ -23,9 +23,7 @@ def TreePoset(upsilon):
     numCoverRelation = 0
     coverRelationP = []
     nextset = False
-    canBeImproved = True
-    while canBeImproved:
-        canBeImproved = False
+    while len(upsilon) > 0:
         nextset = False
         for h in range(m, 0, -1):
             if nextset:
@@ -51,10 +49,6 @@ def TreePoset(upsilon):
                         numCoverRelation = 0
                         coverRelationP = []
                         nextset = True
-                        if len(upsilon) < 1:
-                            canBeImproved = False
-                        else:
-                            canBeImproved = True
                         break
                     else:
                         minRank = [0 for i in range(n)]
