@@ -202,8 +202,14 @@ def gen_tree_poset(upsilon):
                 numCoverRelation +=1
         if numCoverRelation == n-1:
             break
+    
+    P = get_linear_extensions(coverRelationP)
+    Y = get_linear_extensions(Y)
 
-    return coverRelationP
+    if VERIFY(P, Y):
+        return coverRelationP
+    
+    return None
 
 def VERIFY(P, Y):
     if sorted(P) == sorted(Y):
