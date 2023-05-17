@@ -7,3 +7,4 @@ optimalsol/
 inputs/
 .vscode/
 __pycache__
+try_heuristic.py
