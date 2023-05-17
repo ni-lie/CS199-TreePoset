@@ -22,7 +22,6 @@ def TreePoset(upsilon):
     minRank = [0 for i in range(n)]
     numCoverRelation = 0
     coverRelationP = []
-    nextset = False
     while len(upsilon) > 0:
         nextset = False
         for h in range(m, 0, -1):
