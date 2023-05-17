@@ -15,6 +15,10 @@ if not os.path.exists("outputs/"):
     os.makedirs("outputs/")
 
 def TreePoset(upsilon):
+    # Pstar = gen_poset(upsilon)
+    # if Pstar != None:
+    #     return Pstar
+
     Pstar = upsilon
     Ptree = []
     isCombined = True

@@ -189,7 +189,7 @@ def gen_poset(upsilon):
         Y.append(''.join(get_linear_extensions(binaryRel)))
 
     if set(get_linear_extensions(poset)) == set(Y):
-        return sorted(poset)
+        return [sorted(poset)]
     
     return None
 
