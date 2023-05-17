@@ -183,20 +183,17 @@ def combinePosetv2(P1, P2):
                 return P 
             
 def gen_poset(upsilon):
-    if len(upsilon) == 0:
-        return None
+    poset = list(set(upsilon[0]).intersection(*upsilon[1:]))
+    Y = []
+    for binaryRel in upsilon:
+        Y.append(''.join(get_linear_extensions(binaryRel)))
 
-    # Convert the first list to a set
-    intersection_set = set(upsilon[0])
+    if set(get_linear_extensions(poset)) == set(Y):
+        return sorted(poset)
+    
+    return None
 
-    # Find the intersection with each subsequent linearOrder
-    for linearOrder in upsilon[1:]:
-        intersection_set = intersection_set.intersection(linearOrder)
 
-    # Convert the final intersection set back to a list
-    intersection_list = list(intersection_set)
-
-    return sorted(intersection_list)
 
 
 # P1 = [(1, 2), (1, 3), (1, 4), (2, 3), (2, 4), (3, 4)]
