@@ -1,9 +1,9 @@
 """
 ----------- TO RUN -----------------
-python optimalsolution.py <vertex count*> trees
+python optimalsolutions.py <vertex count*> <max posets>
 
 where <vertex count*> = {3, 4, 5, 6}
-
+<max posets> = {1,2,3,4}
 """
 
 import os, sys
@@ -45,6 +45,7 @@ def VERIFY_GROUP(Group_P, Y):
     
 args = sys.argv[1:]
 args[0] = int(args[0])
+args[1] = int(args[1])
 
 #get number of vertices
 n = args[0]
@@ -87,12 +88,16 @@ for p in list(all_combinations_relations):
 #output lines
 lines = []
 #generate all one-tree posets
-lines.append("k = 1")
+k = 1
 covered_groups_LE = []
 for P in Tree_Posets:
     L_P = get_linear_extensions(P)
     covered_groups_LE.append(L_P)
-    lines.append(str(P) + " L(P) = " + str(L_P))
+    lines.append("Input: " + str(L_P))
+    lines.append("Optimal solution cost: " + str(k))
+    lines.append("-----")
+    lines.append(str(P)+"\n")
+    
 
 count_one_tree_posets = len(covered_groups_LE)
 
@@ -104,9 +109,9 @@ count_one_tree_posets = len(covered_groups_LE)
 #check if group is already covered
 #if no, print, append to covered groups
 
-
-for i in range(2, count_one_tree_posets + 1): #end shoud be count_one_tree_posets + 1
-    lines.append("k = " + str(i))
+max_k = args[1]
+for i in range(2, max_k + 1): #end shoud be count_one_tree_posets + 1
+    k = i
     combinations_of_posets = combinations(Tree_Posets, i)
     for group in combinations_of_posets:
         covered_group = []
@@ -115,7 +120,12 @@ for i in range(2, count_one_tree_posets + 1): #end shoud be count_one_tree_poset
         covered_group = set(covered_group)
         covered_group = sorted(covered_group)
         if covered_group not in covered_groups_LE:
-            lines.append(str(list(group)) + " L(P) = " + str(covered_group))
+            lines.append("Input: " + str(covered_group))
+            lines.append("Optimal solution cost: " + str(k))
+            lines.append("-----")
+            for poset in group:
+                lines.append(str(list(poset)))
+            lines.append("")
             covered_groups_LE.append(covered_group)
         #else:
         #    print("NOT INCLUDED:", group, covered_group)
@@ -124,10 +134,10 @@ if not os.path.exists("optsol/"):
     os.makedirs("optsol/")
 
 
-if not os.path.exists(f"optsol/{args[1]}/"):
-    os.makedirs(f"optsol/{args[1]}/")
+if not os.path.exists(f"optsol/trees/"):
+    os.makedirs(f"optsol/trees/")
     
-output = open(f"optsol/{args[1]}/{args[0]}{args[1]}optsol.txt", "w")
+output = open(f"optsol/trees/{args[0]}treesoptsol.txt", "w")
 
 for l in lines:
     output.write(l+"\n")
