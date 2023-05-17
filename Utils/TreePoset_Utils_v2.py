@@ -205,7 +205,10 @@ def gen_tree_poset(upsilon):
 
     return coverRelationP
 
-
+def VERIFY(P, Y):
+    if sorted(P) == sorted(Y):
+        return True
+    return False
 
 
 # P1 = [(1, 2), (1, 3), (1, 4), (2, 3), (2, 4), (3, 4)]
