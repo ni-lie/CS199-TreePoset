@@ -7,17 +7,17 @@ where <vertex count*> = {3, 4, 5, 6}
 """
 import sys, os
 sys.path.append('Utils')
-from TreePoset_Utils_v2 import binaryRelation, combinePosetv2, get_linear_extensions, gen_poset
+from TreePoset_Utils_v2 import binaryRelation, combinePosetv2, get_linear_extensions, gen_tree_poset
 
 args = sys.argv
 
 if not os.path.exists("outputs/"):
     os.makedirs("outputs/")
 
-def TreePoset(upsilon):
-    # Pstar = gen_poset(upsilon)
-    # if Pstar != None:
-    #     return Pstar
+def TreePoset(upsilon, inputLinearOrders):
+    Pstar = gen_tree_poset(inputLinearOrders)
+    if Pstar != None:
+        return [Pstar]
 
     Pstar = upsilon
     Ptree = []
@@ -54,7 +54,7 @@ with open(f'inputs/{args[1]}.txt', 'r') as input_file, open(f'outputs/output_{ar
         inputLinearOrders = [str(item) for item in inputLinearOrders]
 
         Pstar = binaryRelation(inputLinearOrders)
-        posets = TreePoset(Pstar)
+        posets = TreePoset(Pstar, inputLinearOrders)
 
         if posets != None:
             output_file.write(f"Input: {inputLinearOrders}\n")
