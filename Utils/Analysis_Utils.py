@@ -30,11 +30,13 @@ def areTreePosets(group_posets):
     return flag
 
 def isAllConnected(P,n):
-    check_vertices = [False for x in range(n)] #array that checks if all vertices are included
-    for (a,b) in P:
-        check_vertices[a-1] = True
-        check_vertices[b-1] = True
-    if False not in check_vertices and nx.is_directed_acyclic_graph(nx.DiGraph(P)):
-        return True
-    else:
-        return False
+    for p in P:
+        check_vertices = [False for x in range(n)] #array that checks if all vertices are included
+        for (a,b) in p:
+            check_vertices[a-1] = True
+            check_vertices[b-1] = True
+        if False not in check_vertices and nx.is_directed_acyclic_graph(nx.DiGraph(p)):
+            continue
+        else:
+            return False
+    return True
