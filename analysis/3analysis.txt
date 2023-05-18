@@ -1,0 +1,64 @@
+Input: [123, 132]
+Optimal Solution: [[(1, 2), (1, 3)]]
+Heuristic Solution: [[(1, 2), (1, 3)]]
+Analysis: CORRECT - OPTIMAL
+
+Input: [123]
+Optimal Solution: [[(1, 2), (2, 3)]]
+Heuristic Solution: [[(3, 1), (1, 2)]]
+Analysis: CORRECT - OPTIMAL
+
+Input: [312]
+Optimal Solution: [[(1, 2), (3, 1)]]
+Heuristic Solution: [[(2, 1), (1, 3)]]
+Analysis: CORRECT - OPTIMAL
+
+Input: [213]
+Optimal Solution: [[(1, 3), (2, 1)]]
+Heuristic Solution: [[(2, 3), (3, 1)], [(3, 2), (2, 1)]]
+Analysis: CORRECT - NOT OPTIMAL
+
+Input: [132]
+Optimal Solution: [[(1, 3), (3, 2)]]
+Heuristic Solution: [[(1, 2), (2, 3)]]
+Analysis: CORRECT - OPTIMAL
+
+Input: [213, 231]
+Optimal Solution: [[(2, 1), (2, 3)]]
+Heuristic Solution: [[(1, 3), (3, 2)], [(3, 1), (1, 2)]]
+Analysis: CORRECT - NOT OPTIMAL
+
+Input: [321]
+Optimal Solution: [[(2, 1), (3, 2)]]
+Heuristic Solution: [[(2, 1), (2, 3)]]
+Analysis: CORRECT - OPTIMAL
+
+Input: [231]
+Optimal Solution: [[(2, 3), (3, 1)]]
+Heuristic Solution: [[(3, 2), (2, 1)]]
+Analysis: CORRECT - OPTIMAL
+
+Input: [312, 321]
+Optimal Solution: [[(3, 1), (3, 2)]]
+Heuristic Solution: [[(1, 3), (3, 2)]]
+Analysis: CORRECT - OPTIMAL
+
+Input: [123, 132, 312]
+Optimal Solution: [[(1, 2), (1, 3)], [(1, 2), (3, 1)]]
+Heuristic Solution: [[(1, 2), (2, 3)], [(2, 1), (1, 3)]]
+Analysis: CORRECT - OPTIMAL
+
+Input: [123, 132, 213]
+Optimal Solution: [[(1, 2), (1, 3)], [(1, 3), (2, 1)]]
+Heuristic Solution: [[(3, 1), (3, 2)]]
+Analysis: INCORRECT - NOT OPTIMAL
+
+Input: [123, 132, 213, 231]
+Optimal Solution: [[(1, 2), (1, 3)], [(2, 1), (2, 3)]]
+Heuristic Solution: [[(2, 3), (3, 1)]]
+Analysis: INCORRECT - NOT OPTIMAL
+
+Summary
+Total Number of Inputs: 63
+Total Number of Correct Heuristic Solutions: 10
+Total Number of Optimal Heuristic Solutions: 8
