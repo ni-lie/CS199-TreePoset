@@ -1,8 +1,10 @@
 """
 ----------- TO RUN -----------------
-python TreePoset.py <vertex count*> 
+python analysis.py <vertex count*> 
 
 where <vertex count*> = {3, 4, 5, 6}
+
+note: Before running, run optimalsolutions.py first to generate the inputs and optimal solutions
 
 """
 
