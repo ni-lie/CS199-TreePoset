@@ -8,6 +8,7 @@ where <vertex count*> = {3, 4, 5, 6}
 
 import sys, os
 from ast import literal_eval
+from Analysis_Utils import isTreePoset, areTreePosets, isAllConnected
 
 args = sys.argv
 
@@ -55,3 +56,27 @@ with open(f'optsol/trees/{args[1]}treesoptsol.txt', 'r') as optimal_file, open(f
             start = line.index('[')
             lst = literal_eval(line[start:])
             heuristicsol[-1].append(lst)
+
+    #write to a new file <vertex>analysis.py on directory /analysis
+    #write analysis per input in this format:
+    #Input: [123, 132]
+    #Optimal Solution: [[(1, 2), (1, 3)]]
+    #Heuristic Solution: [[(1, 2), (1, 3)]]
+    #Analysis: CORRECT - OPTIMAL
+    # ... UNTIL EOF
+    #SUMMARY
+    #Total Number of Inputs:
+    #Total Number of Correct Heuristic Solutions:
+    #Total Number of Optimal Heuristic Solutions:
+
+    if not os.path.exists("analysis/"):
+        os.makedirs("analysis/")
+    
+    output = open(f"analysis/{args[1]}analysis.txt", "w")
+    for (input, cost, O_sol, H_sol) in zip(inputs, optcost, optsol, heuristicsol):
+        output.write("Input: "+ str(input)+"\n")
+        output.write("Optimal Solution: "+ str(O_sol)+"\n")
+        output.write("Heuristic Solution: "+ str(H_sol)+"\n")
+        if cost == len(H_sol):
+            output.write("Analysis: CORRECT - OPTIMAL")
+        
