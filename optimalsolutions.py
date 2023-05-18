@@ -93,9 +93,8 @@ covered_groups_LE = []
 for P in Tree_Posets:
     L_P = get_linear_extensions(P)
     covered_groups_LE.append(L_P)
-    lines.append("Input: " + str(L_P))
+    lines.append("Input: " + str([int(x) for x in L_P]))
     lines.append("Optimal solution cost: " + str(k))
-    lines.append("-----")
     lines.append(str(P)+"\n")
     
 
@@ -120,9 +119,8 @@ for i in range(2, max_k + 1): #end shoud be count_one_tree_posets + 1
         covered_group = set(covered_group)
         covered_group = sorted(covered_group)
         if covered_group not in covered_groups_LE:
-            lines.append("Input: " + str(covered_group))
+            lines.append("Input: " + str([int(x) for x in covered_group]))
             lines.append("Optimal solution cost: " + str(k))
-            lines.append("-----")
             for poset in group:
                 lines.append(str(list(poset)))
             lines.append("")
@@ -150,7 +148,7 @@ if not os.path.exists(f"optsol/inputs/"):
 output = open(f"optsol/inputs/{args[0]}treesinput.txt", "w")
 
 for LE in covered_groups_LE:
-    output.write(str(LE)+"\n")
+    output.write(str([int(x) for x in LE])+"\n")
 output.close
 
 print("FINISHED GENERATING INPUT LINEAR ORDERS")

@@ -43,7 +43,8 @@ def TreePoset(upsilon):
 
     return Pstar
 
-with open(f'inputs/{args[1]}.txt', 'r') as input_file, open(f'outputs/output_{args[1]}.txt', 'w') as output_file:
+#with open(f'inputs/{args[1]}.txt', 'r') as input_file, open(f'outputs/output_{args[1]}.txt', 'w') as output_file:
+with open(f'optsol/inputs/{args[1]}treesinput.txt', 'r') as input_file, open(f'outputs/output_{args[1]}.txt', 'w') as output_file:
     for line in input_file:
         inputLinearOrders = [int(x) for x in line.strip('[]\n').split(',')]
         inputLinearOrders.sort()
@@ -58,7 +59,7 @@ with open(f'inputs/{args[1]}.txt', 'r') as input_file, open(f'outputs/output_{ar
                 output_file.write(f"P{str(i+1)}: {posets[i]}\n")
             output_file.write("\n")
         else:
-            output_file.write(f"Input: {inputLinearOrders}\n")
+            output_file.write(f"Input: {[int(x) for x in inputLinearOrders]}\n")
             output_file.write("None!!!!!\n\n")
 
 if posets != None:
