@@ -9,7 +9,7 @@ where <vertex count*> = {3, 4, 5, 6}
 import sys, os
 from ast import literal_eval
 sys.path.append('Utils')
-from Analysis_Utils import isTreePoset, areTreePosets, isAllConnected
+from Analysis_Utils import isTreePoset, areTreePosets, isAllConnected, binaryToCover
 
 args = sys.argv
 
@@ -40,6 +40,7 @@ with open(f'optsol/trees/{args[1]}treesoptsol.txt', 'r') as optimal_file, open(f
                 optsol[-1].append(lst) #n + 1 posets are added to the latest group of posets added
                 insert_optsols -= 1
 
+    n = len(str(inputs[0][0]))
     #Heuristic data
     heuristicsol = []
     for line in HeuristicOutput_file:
@@ -49,6 +50,7 @@ with open(f'optsol/trees/{args[1]}treesoptsol.txt', 'r') as optimal_file, open(f
             #first poset is added to the list of heuristic solutions
             start = line.index('[')
             lst = literal_eval(line[start:])
+            lst = binaryToCover(lst, n)
             heuristicsol.append([])
             heuristicsol[-1].append(lst)
         elif line == "\n":
@@ -56,6 +58,7 @@ with open(f'optsol/trees/{args[1]}treesoptsol.txt', 'r') as optimal_file, open(f
         else:
             start = line.index('[')
             lst = literal_eval(line[start:])
+            lst = binaryToCover(lst, n)
             heuristicsol[-1].append(lst)
 
     #write to a new file <vertex>analysis.py on directory /analysis
@@ -80,7 +83,6 @@ with open(f'optsol/trees/{args[1]}treesoptsol.txt', 'r') as optimal_file, open(f
     correct = 0
     optimal = 0
     for (input, cost, O_sol, H_sol) in zip(inputs, optcost, optsol, heuristicsol):
-        n = len(str(input[0])) #number of vertices
         output.write("Input: "+ str(input)+"\n")
         output.write("Optimal Solution: "+ str(O_sol)+"\n")
         output.write("Heuristic Solution: "+ str(H_sol)+"\n")
@@ -88,7 +90,7 @@ with open(f'optsol/trees/{args[1]}treesoptsol.txt', 'r') as optimal_file, open(f
             output.write("Analysis: CORRECT - OPTIMAL\n")
             correct += 1
             optimal += 1
-        elif areTreePosets(H_sol) and isAllConnected(H_sol, n) and len(H_sol) != cost:
+        elif areTreePosets(H_sol) and isAllConnected(H_sol, n) and len(H_sol) > cost:
             output.write("Analysis: CORRECT - NOT OPTIMAL\n")
             correct += 1
         else:
@@ -98,7 +100,7 @@ with open(f'optsol/trees/{args[1]}treesoptsol.txt', 'r') as optimal_file, open(f
     output.write("Summary\n")
     output.write("Total Number of Inputs: "+str(len_inputs)+"\n")
     output.write("Total Number of Correct Heuristic Solutions: "+str(correct)+"\n")
-    output.write("Total Number of Correct Optimal Solutions: "+str(optimal)+"\n")
+    output.write("Total Number of Optimal Heuristic Solutions: "+str(optimal)+"\n")
     output.close
 
     print("FINISHED ANALYSING HEURISTIC")

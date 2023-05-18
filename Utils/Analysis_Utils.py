@@ -40,3 +40,21 @@ def isAllConnected(P,n):
         else:
             return False
     return True
+
+def binaryToCover(P,n):
+    coverRelations = []
+    for (u,v) in P:
+        if (u,v) in coverRelations:
+            continue
+        if len(coverRelations) == n - 1:
+            break
+        for w in range(1, n+1):
+            if w == u or w == v:
+                continue
+            else:
+                if (u,w) in P and (w,v) in P:
+                    break
+                else:
+                    coverRelations.append((u,v))
+                    break
+    return sorted(coverRelations)
