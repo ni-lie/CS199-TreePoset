@@ -10,3 +10,4 @@ __pycache__
 try_heuristic.py
 analysis/
 optsol/
+optsol_try.py
