@@ -16,14 +16,14 @@ if not os.path.exists("outputs/"):
 
 def TreePoset(upsilon):
     Ptree = []
-    m = len(upsilon)     
-    n = len(upsilon[0])
-
-
+    
     while len(upsilon) > 0:
         m = len(upsilon)     
         n = len(upsilon[0])
         for h in range(m, 0, -1):
+            minRank = [0 for i in range(n)]
+            numCoverRelation = 0
+            coverRelationP = []
             for i in range(1,n):
                 for j in range(h):
                     v2 = rankInverse(i, upsilon[j])
@@ -34,15 +34,12 @@ def TreePoset(upsilon):
                         minRank[int(v1)-1] = i-1
                         numCoverRelation +=1
                 if numCoverRelation == n-1:
-                    P = get_linear_extensions(coverRelationP)
-                    if VERIFY(P, upsilon[:h]):
-                        Ptree.append(coverRelationP)
-                        upsilon = upsilon[h:]
-                
-                    minRank = [0 for i in range(n)]
-                    numCoverRelation = 0
-                    coverRelationP = []
                     break
+            P = get_linear_extensions(coverRelationP)
+            if VERIFY(P, upsilon[:h]):
+                Ptree.append(coverRelationP)
+                upsilon = upsilon[h:]
+                break
     
     return Ptree
 
@@ -77,6 +74,7 @@ if posets != None:
     print("Check 'output' directory")
 else:
     print("Generated nothing")
+
 
 
 
