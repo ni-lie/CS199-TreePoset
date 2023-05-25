@@ -66,26 +66,51 @@ def getRoot(P):
 
 
 # returns True if poset P is a Tree Poset
-def isTreePoset(P):
-    V = getVertices(P)
-    root = getRoot(P)
+def isTreePoset(cover_relations):
+    n = len(cover_relations)+1
+    check_vertices = [False for x in range(n)] #array that checks if all vertices are included
+    parent = [0 for x in range(n)] #array of number of parents of a vertex
+    for (a,b) in cover_relations:
+        check_vertices[a-1] = True
+        check_vertices[b-1] = True
+        parent[b-1] += 1
+        
+    #Check if the valid poset permutation is a tree poset
+    for v in parent:
+        if (v > 1) or (0 not in parent):
+            return False
 
-    prec = [0 for i in range(len(V))]
-    succ = [0 for i in range(len(V))]
-
-    for i in range(len(P)):
-        prec[P[i][1] - 1] += 1
-        succ[P[i][0] - 1] += 1
-    
-    # for i in range(len(V)):
-    #     if i == root-1 and prec[i] == 0:
-    #         continue
-
-    if sum(prec) == sum(succ) and succ[root-1] > 0:
+    #check if all edges are connected
+    if False not in check_vertices and nx.is_directed_acyclic_graph(nx.DiGraph(cover_relations)):
         return True
+    else:
+        return False
 
-    return False
+#INPUT: set of binary relations; OUTPUT: equivalent set of cover relations
+def binaryToCover(P):
+    #find number of vertices n
+    n = 1
+    for pair in P:
+        if max(pair) > n:
+            n = max(pair)
 
+    coverRelations = []
+    for (u,v) in P:
+        if (u,v) in coverRelations:
+            continue
+        #if len(coverRelations) == n - 1:
+        #    break
+        transitive = False
+        for w in range(1, n+1):
+            if w == u or w == v:
+                continue
+            else:
+                if (u,w) in P and (w,v) in P:
+                    transitive = True
+                    break
+        if not transitive:
+            coverRelations.append((u,v))
+    return sorted(coverRelations)
     
 def combinePoset(P1, P2):
     P3 = getDifference(P1, P2)
@@ -104,7 +129,7 @@ def combinePoset(P1, P2):
             return None
         
         P = getDifference(P1, P3)
-        return P
+        #return P
     
     elif len(P3) > 1 and len(P4) > 1:
         return None
@@ -116,15 +141,16 @@ def combinePoset(P1, P2):
         #     P = getDifference(P1, P3)
         if (b, a) in P4 and set(getDifference(P1, P3)) == set(getDifference(P2, P4)):
             P = getDifference(P1, P3)
-            return P
+            #return P
     elif len(P4) == 1:
         P4_ele = P4[0]
         a, b = P4_ele[0], P4_ele[1]
          
         if (b, a) in P3 and set(getDifference(P1, P3)) == set(getDifference(P2, P4)):
             P = getDifference(P1, P3)
-            return P
-    # if isTreePoset(P):
+            #return P
+    if isTreePoset(binaryToCover(P)):
+        return P
     return None
 
 def combinePosetv2(P1, P2):
@@ -147,7 +173,7 @@ def combinePosetv2(P1, P2):
             return None
         
         P = getDifference(P1, P3)
-        return P
+        #return P
 
     elif len(P3) > 1 and len(P4) > 1:
         return None
@@ -166,7 +192,7 @@ def combinePosetv2(P1, P2):
                 return None
             elif set(P1_temp).issubset(set(P2_temp)):
                 P = getDifference(P1, P3)
-                return P
+                #return P
         elif len(P4) == 1:
             P4_ele = P4[0]
             a, b = P4_ele[0], P4_ele[1]
@@ -180,7 +206,10 @@ def combinePosetv2(P1, P2):
                 return None
             elif set(P2_temp).issubset(set(P1_temp)):
                 P = getDifference(P1, P3)
-                return P 
+                #return P 
+    if isTreePoset(binaryToCover(P)):
+        return P
+    return None
             
 # OneTreePoset function
 def gen_tree_poset(upsilon):
