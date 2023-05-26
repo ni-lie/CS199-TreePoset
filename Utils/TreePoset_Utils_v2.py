@@ -254,6 +254,26 @@ def rankInverse(index, linearOrder):
     # sample input: index = 3; linearOrder = 1234; 
     return linearOrder[index]       # output: 4
 
+#returns the tuple (intersection, difference) of all posets in Pstar
+def intersection_difference(Pstar):
+    intersection = Pstar[0].copy()
+
+    difference = []
+    union = []
+    for poset in Pstar[1:]:
+        not_intersection = []
+        for relation in intersection:
+            if relation not in poset:
+                not_intersection.append(relation)
+            
+        for relation in not_intersection:
+            intersection.remove(relation)
+    
+    for poset in Pstar:
+        union += poset
+    union = sorted(list(set(union)))
+    difference = getDifference(union, intersection)
+    return (intersection, difference)
 
 # Y = ['1234', '1243']
 

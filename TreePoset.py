@@ -7,45 +7,71 @@ where <vertex count*> = {3, 4, 5, 6}
 """
 import sys, os
 sys.path.append('Utils')
-from TreePoset_Utils_v2 import binaryRelation, combinePosetv2, get_linear_extensions, gen_tree_poset
+from TreePoset_Utils_v2 import binaryRelation, combinePosetv2, get_linear_extensions, gen_tree_poset, getDifference, intersection_difference, isTreePoset, binaryToCover
 
 args = sys.argv
 
 if not os.path.exists("outputs/"):
     os.makedirs("outputs/")
 
-def TreePoset(upsilon, inputLinearOrders):
-    Pstar = gen_tree_poset(inputLinearOrders)
-    if Pstar != None:
-        return [Pstar]
+def TreePoset(Pstar, inputlinearorders):
+    output_posets = []
 
-    Pstar = upsilon
-    Ptree = []
-    isCombined = True
-    
-    while isCombined:
-        isCombined = False
+    #base case: return intersection if |Pstar| == 1
 
-        while len(Pstar) > 0:
-            poset1 = Pstar[0]
-            Pstar.pop(0)
-            hasPair = False
-            for i in range(len(Pstar)):
-                combinedposet = combinePosetv2(poset1, Pstar[i])
-                if combinedposet != None and set(get_linear_extensions(combinedposet)) == set(get_linear_extensions(poset1)).union(set(get_linear_extensions(Pstar[i]))):
-                    Ptree.append(combinedposet) 
-                    Pstar.pop(i)
-                    hasPair = True
-                    isCombined = True
+    not_covered = []
+    not_covered_linear = []
+    while len(Pstar) >= 1:
+        if len(Pstar) == 1:
+            output_posets.append(Pstar[0])
+            Pstar = not_covered.copy()
+            inputlinearorders = not_covered_linear.copy()
+            not_covered = []
+            not_covered_linear = []
+            continue
+        #1. getting intersection and difference of all posets
+        I_D = intersection_difference(Pstar)
+        intersection = I_D[0]
+        difference = I_D[1]
+        #2. check if number of binary relations >= n - 1   
+        n = len(inputlinearorders[0])
+        if len(binaryToCover(intersection)) < n - 1:
+            not_covered += [Pstar.pop(-1)] #remove the poset at the end of Pstar and go back to step 1
+            not_covered_linear += [inputlinearorders.pop(-1)]
+        #3. If condition above was satisfied, proceed to eliminating binary relations. [COMBINING POSETS]
+        else:
+            go_back_to_step_2 = False
+            while len(difference) > 0:
+                (a,b) = difference[0]
+                if (b,a) in difference:
+                    difference.remove((a,b))
+                    difference.remove((b,a))
+                else:
+                    go_back_to_step_2 = True
                     break
-            
-            if not hasPair:
-                Ptree.append(poset1)
-            
-        Pstar = Ptree.copy()
-        Ptree = []
-
-    return Pstar
+            if go_back_to_step_2:
+                not_covered += [Pstar.pop(-1)] 
+                not_covered_linear += [inputlinearorders.pop(-1)]
+            else:
+                #VERIFY if intersection of posets is a tree poset
+                cover_relations_intersection = binaryToCover(intersection)
+                if len(cover_relations_intersection) == n - 1:
+                    if isTreePoset(cover_relations_intersection) and sorted(get_linear_extensions(cover_relations_intersection)) == sorted(getDifference(inputlinearorders, not_covered_linear)):
+                        #4. add intersection to output_posets
+                        output_posets.append(intersection)
+                        inputlinearorders = not_covered_linear
+                        #go back to step 1
+                        Pstar = not_covered.copy()
+                        inputlinearorders = not_covered_linear.copy()
+                        not_covered = []
+                        not_covered_linear = []
+                    else:
+                        not_covered += [Pstar.pop(-1)] 
+                        not_covered_linear += [inputlinearorders.pop(-1)]
+                else:
+                    not_covered += [Pstar.pop(-1)] 
+                    not_covered_linear += inputlinearorders[-1]
+    return output_posets
 
 #with open(f'inputs/{args[1]}.txt', 'r') as input_file, open(f'outputs/output_{args[1]}.txt', 'w') as output_file:
 with open(f'optsol/inputs/{args[1]}treesinput.txt', 'r') as input_file, open(f'outputs/output_{args[1]}.txt', 'w') as output_file:
