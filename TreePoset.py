@@ -35,7 +35,7 @@ def TreePoset(Pstar, inputlinearorders):
         difference = I_D[1]
         #2. check if number of binary relations >= n - 1   
         n = len(inputlinearorders[0])
-        if len(binaryToCover(intersection)) < n - 1:
+        if len(binaryToCover(intersection)) < n - 1 or (not isTreePoset(binaryToCover(intersection))):
             not_covered += [Pstar.pop(-1)] #remove the poset at the end of Pstar and go back to step 1
             not_covered_linear += [inputlinearorders.pop(-1)]
         #3. If condition above was satisfied, proceed to eliminating binary relations. [COMBINING POSETS]
