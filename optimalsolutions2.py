@@ -102,7 +102,7 @@ for P in Tree_Posets:
     lines.append(str(P)+"\n")
     
 
-count_one_tree_posets = len(covered_groups_LE)
+count_tree_posets = len(covered_groups_LE)
 
 #generate all possible groups of posets
 
@@ -152,6 +152,8 @@ else:
                     lines.append(str(list(poset)))
                 lines.append("")
                 covered_groups_LE.append(covered_group)
+                count_tree_posets +=1
+                print("poset added", count_tree_posets)
             #else:
             #    print("NOT INCLUDED:", group, covered_group)
             #else:
@@ -161,16 +163,12 @@ else:
     if n == 5:
         num_random = 20493
     elif n == 6:
-        num_random = 10000
+        num_random = 98704
     print("randomizing")
     k = k + 1
     for i in range(num_random):
         group = []
-        for x in range(max_k):
-            poset = random.choice(Tree_Posets)
-            while poset in group: #ensures that no poset is repeated in a group of k posets
-                poset = random.choice(Tree_Posets)
-            group.append(poset)
+        group = random.choices(Tree_Posets, k=max_k)
         covered_group = []
         for poset in group:
             covered_group += get_linear_extensions(list(poset))
@@ -179,11 +177,7 @@ else:
         while covered_group in covered_groups_LE: #ensures that the poset generated is optimal
             print("not a valid poset, try again")
             group = []
-            for y in range(max_k):
-                poset = random.choice(Tree_Posets)
-                while poset in group: #ensures that no poset is repeated in a group of k posets
-                    poset = random.choice(Tree_Posets)
-                group.append(poset)
+            group = random.choices(Tree_Posets, k=max_k)
             covered_group = []
             for poset in group:
                 covered_group += get_linear_extensions(list(poset))
