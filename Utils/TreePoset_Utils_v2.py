@@ -77,7 +77,7 @@ def isTreePoset(cover_relations):
         
     #Check if the valid poset permutation is a tree poset
     for v in parent:
-        if (v > 1) or (0 not in parent):
+        if (v > 1) or (0 not in parent) or (parent.count(0)>1):
             return False
 
     #check if all edges are connected
