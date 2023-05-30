@@ -114,7 +114,7 @@ count_one_tree_posets = len(covered_groups_LE)
 
 
 max_k = int(args[1])
-if n < 6:
+if n < 5:
     for i in range(2, max_k + 1): #end shoud be count_one_tree_posets + 1
         k = i
         combinations_of_posets = combinations(Tree_Posets, i)
@@ -158,9 +158,13 @@ else:
             #    print("NOT INCLUDED:", group, covered_group)
     
     #randomizing for the rest of the test cases
+    if n == 5:
+        num_random = 20493
+    elif n == 6:
+        num_random = 10000
     print("randomizing")
     k = k + 1
-    for i in range(100):
+    for i in range(num_random):
         group = []
         for x in range(max_k):
             poset = random.choice(Tree_Posets)
@@ -173,6 +177,7 @@ else:
             covered_group = set(covered_group)
             covered_group = sorted(covered_group)    
         while covered_group in covered_groups_LE: #ensures that the poset generated is optimal
+            print("not a valid poset, try again")
             group = []
             for y in range(max_k):
                 poset = random.choice(Tree_Posets)
