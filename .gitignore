@@ -7,3 +7,6 @@ optimalsol/
 inputs/
 .vscode/
 __pycache__
+analysis/
+optsol/
+optsol_try.py
