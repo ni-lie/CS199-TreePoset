@@ -100,8 +100,8 @@ with open(f'optsol/trees/{args[1]}treesoptsol.txt', 'r') as optimal_file, open(f
             not_optimal.append(diff_cost)
             correct += 1
             output.write("Analysis: CORRECT - NOT OPTIMAL\n")
-            output.write("Heuristic_Cost - Optimal_Cost: "+str(diff_cost)+"\n")
-            performanceRatio = len(H_sol) / cost
+            #output.write("Heuristic_Cost - Optimal_Cost: "+str(diff_cost)+"\n")
+            performanceRatio += len(H_sol) / cost
         else:
             output.write("Analysis: INCORRECT - NOT OPTIMAL\n")
             output.write("Output: "+ str(covered(H_sol))+"\n")
