@@ -117,8 +117,8 @@ with open(f'optsol/trees/{args[1]}treesoptsol.txt', 'r') as optimal_file, open(f
     output.write("Total Number of Inputs: "+str(len_inputs)+"\n")
     output.write("Total Number of Correct Heuristic Solutions: "+str(correct)+"\n")
     output.write("Total Number of Optimal Heuristic Solutions: "+str(optimal)+"\n")
-    output.write("Average difference in Heuristic Cost and Optimal Cost: "+str(average_diff_not_optimal)+"\n")
-    output.write("Maximum difference in Heuristic Cost and Optimal Cost: "+str(max_not_optimal)+"\n")
+    #output.write("Average difference in Heuristic Cost and Optimal Cost: "+str(average_diff_not_optimal)+"\n")
+    #output.write("Maximum difference in Heuristic Cost and Optimal Cost: "+str(max_not_optimal)+"\n")
     output.write("Performance Approximation Ratio: "+str((performanceRatio/len_inputs))+"\n")
     output.close
 
