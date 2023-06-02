@@ -81,7 +81,8 @@ def isTreePoset(cover_relations):
             return False
 
     #check if all edges are connected
-    if False not in check_vertices and nx.is_directed_acyclic_graph(nx.DiGraph(cover_relations)):
+    #if False not in check_vertices and nx.is_directed_acyclic_graph(nx.DiGraph(cover_relations)):
+    if False not in check_vertices:
         return True
     else:
         return False
