@@ -68,11 +68,11 @@ with open(f'optsol/trees/{args[1]}treesoptsol.txt', 'r') as optimal_file, open(f
     #Input: [123, 132]
     #Optimal Solution: [[(1, 2), (1, 3)]]
     #Heuristic Solution: [[(1, 2), (1, 3)]]
-    #Analysis: CORRECT - OPTIMAL
+    #Analysis: FEASIBLE - OPTIMAL
     # ... UNTIL EOF
     #SUMMARY
     #Total Number of Inputs:
-    #Total Number of Correct Heuristic Solutions:
+    #Total Number of FEASIBLE Heuristic Solutions:
     #Total Number of Optimal Heuristic Solutions:
 
     if not os.path.exists("analysis/"):
@@ -82,7 +82,7 @@ with open(f'optsol/trees/{args[1]}treesoptsol.txt', 'r') as optimal_file, open(f
 
     #for summary
     len_inputs = len(inputs)
-    correct = 0
+    Feasible = 0
     optimal = 0
     not_optimal = []
     performanceRatio = 0
@@ -91,19 +91,19 @@ with open(f'optsol/trees/{args[1]}treesoptsol.txt', 'r') as optimal_file, open(f
         output.write("Optimal Solution: "+ str(O_sol)+"\n")
         output.write("Heuristic Solution: "+ str(H_sol)+"\n")
         if areTreePosets(H_sol) and isAllConnected(H_sol, n) and len(H_sol) == cost and covered(H_sol) == input:
-            output.write("Analysis: CORRECT - OPTIMAL\n")
-            correct += 1
+            output.write("Analysis: FEASIBLE - OPTIMAL\n")
+            Feasible += 1
             optimal += 1
             performanceRatio +=1
         elif areTreePosets(H_sol) and isAllConnected(H_sol, n) and len(H_sol) > cost and covered(H_sol) == input:
             diff_cost = len(H_sol) - cost
             not_optimal.append(diff_cost)
-            correct += 1
+            Feasible += 1
             performanceRatio += len(H_sol) / cost
-            output.write("Analysis: CORRECT - NOT OPTIMAL\n")
+            output.write("Analysis: FEASIBLE - NOT OPTIMAL\n")
             #output.write("Heuristic_Cost - Optimal_Cost: "+str(diff_cost)+"\n")
         else:
-            output.write("Analysis: INCORRECT - NOT OPTIMAL\n")
+            output.write("Analysis: NOT FEASIBLE - NOT OPTIMAL\n")
             output.write("Output: "+ str(covered(H_sol))+"\n")
         output.write("\n")
 
@@ -115,11 +115,11 @@ with open(f'optsol/trees/{args[1]}treesoptsol.txt', 'r') as optimal_file, open(f
         max_not_optimal = max(not_optimal)
     output.write("Summary\n")
     output.write("Total Number of Inputs: "+str(len_inputs)+"\n")
-    output.write("Total Number of Correct Heuristic Solutions: "+str(correct)+"\n")
+    output.write("Total Number of Feasible Heuristic Solutions: "+str(Feasible)+"\n")
     output.write("Total Number of Optimal Heuristic Solutions: "+str(optimal)+"\n")
     #output.write("Average difference in Heuristic Cost and Optimal Cost: "+str(average_diff_not_optimal)+"\n")
     #output.write("Maximum difference in Heuristic Cost and Optimal Cost: "+str(max_not_optimal)+"\n")
-    output.write("Performance Approximation Ratio: "+str((performanceRatio/len_inputs))+"\n")
+    output.write("Approximation Error: "+str((performanceRatio/len_inputs))+"\n")
     output.close
 
     print("FINISHED ANALYSING HEURISTIC")
