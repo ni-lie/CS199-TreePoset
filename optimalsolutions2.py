@@ -3,10 +3,10 @@
 python optimalsolutions.py <vertex count*> <max posets>
 
 where <vertex count*> = {3, 4, 5, 6}
-<max posets> = {1,2,3,4}
+<max posets*> = {1,2,3,4}
 
-for <vertex count> = 5, <max posets> should be 4
-for <vertex count> = 6, <max posets> should be 3
+for <vertex count*> = 5, <max posets*> should be limited to up to 4
+for <vertex count*> = 6, <max posets*> should be limited to up to 3
 """
 
 import os, sys
