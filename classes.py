@@ -1,6 +1,4 @@
 # source: songsong and angeles
-import time
-
 INVALID = -1
 Sequence = list[int]
 Vertices = list[int]
@@ -98,17 +96,3 @@ class Graph:
         marked = [False] * lenNodes
         path = []
         self._findAllTopologicalOrders(path, marked, lenNodes)
-
-class Timer:
-
-    def __init__(self):
-        self._start_time = None
-    
-    def start(self):
-        self._start_time = time.perf_counter()
-    
-    def stop(self):
-        elapsed_time = time.perf_counter() - self._start_time
-        self._start_time = None
-
-        return elapsed_time
