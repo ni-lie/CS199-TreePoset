@@ -1,4 +1,4 @@
-﻿# ***A Heuristic for the Tree Poset Cover Problem***
+<h1 align='center'> A Heuristic for the Tree Poset Cover Problem </h1>
 The Tree Poset Cover Problem is an optimization problem where the goal is to determine a
 minimum set of Tree Posets that covers a given set of input linear orders. This problem finds
 application in various real-world scenarios including data mining where constructing directed
