@@ -15,24 +15,24 @@ their connections to adjacent transposition graphs and linear extensions.
 ## Run the following commands in order:
 1. Generate an input file and optimal solution file (choose either exhaustive or random generation)  
     **Exhaustive**
-    ```
+    ```python
     python optimalsolutions.py <vertex count*> <max posets*>
     ```
     **Random**
-    ```
+    ```python
     python optimalsolutions2.py <vertex count*> <max posets*>
     ```
 2. Generate heuristic solutions on the input file (choose either heuristic-one or heuristic-two)
-    ```
+    ```python
     python heuristic-<one/two>.py <vertex count*>
     ```
 3. Generate analysis of optimal and heuristic solutions
-    ```
+    ```python
     python analysis.py <vertex count*>
     ```
 
 *`vertex count` should be valued 3 or greater  
 *`max posets` should be valued 1 or greater
 
-*Some notes*
-- When using a standard or typical machine, it is advisable to limit the `<vertex count*>` to a maximum of 6 and the `<max posets*>` to a maximum of 4. Once you exceed these values, generating the desired file will require a significant amount of time.
+> **Notes**
+> When using a standard or typical machine, it is advisable to limit the `<vertex count*>` to a maximum of 6 and the `<max posets*>` to a maximum of 4. Once you exceed these values, generating the desired file will require a significant amount of time.
