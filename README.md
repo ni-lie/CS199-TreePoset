@@ -34,5 +34,5 @@ their connections to adjacent transposition graphs and linear extensions.
 *`vertex count` should be valued 3 or greater  
 *`max posets` should be valued 1 or greater
 
-> **Notes**  
+> **Note**  
 > When using a standard or typical machine, it is advisable to limit the `<vertex count*>` to a maximum of 6 and the `<max posets*>` to a maximum of 4. Once you exceed these values, generating the desired file will require a significant amount of time.
