@@ -1,4 +1,4 @@
-<h1 align='center'> A Heuristic for the Tree Poset Cover Problem </h1>
+<h1 align='center'> :deciduous_tree: A Heuristic for the Tree Poset Cover Problem :deciduous_tree: </h1>
 The Poset Cover Problem aims to find a minimum set of posets that cover a given input set of linear orders. 
 This problem has practical applications in data mining, particularly in constructing directed networks from sequential data. The decision version of the problem is known to be NP-hard. 
 In this study, we focus on a variant called the Tree Poset Cover Problem, which requires identifying a minimum set of tree posets needed to cover a given input set of linear orders. 
@@ -10,9 +10,9 @@ Furthermore, we empirically evaluate the performance of Heuristic 1 and Heuristi
     <img src="Utils\images\TreePosetCoverProblem.png" alt="image">
 </p>
 
-## Usage:
+## Usage :keyboard:
 > **Note**
-> Make sure to run the codes in the order they're listed below – it really matters!
+> Make sure to run the codes in the order they're listed below – it really matters! :dizzy:
 1. Generate an input file and optimal solution file (choose either exhaustive or random generation)  
     **Exhaustive**
     ```python
