@@ -13,7 +13,7 @@ Furthermore, we empirically evaluate the performance of Heuristic 1 and Heuristi
 </p>
 
 ## Usage :keyboard:
-> **Note**
+> [!NOTE]
 > Make sure to run the codes in the order they're listed below – it really matters! :dizzy:
 1. Generate an input file and optimal solution file (choose either exhaustive or random generation)  
     **Exhaustive**
@@ -36,5 +36,5 @@ Furthermore, we empirically evaluate the performance of Heuristic 1 and Heuristi
 *`vertex count` should be valued 3 or greater  
 *`max posets` should be valued 1 or greater
 
-> **Warning**  
+> [!WARNING] 
 > When using a standard or typical machine, it is advisable to limit the `<vertex count*>` to a maximum of 6 and the `<max posets*>` to a maximum of 4. Once you exceed these values, generating the desired file will require a significant amount of time.
