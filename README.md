@@ -1,4 +1,4 @@
-<h1 align='center'> :deciduous_tree: A Heuristic for the Tree Poset Cover Problem :deciduous_tree: </h1>
+<h1 align='center'> :deciduous_tree: Two Heuristics for the Tree Poset Cover Problem :deciduous_tree: </h1>
 <b>Abstract</b>
 
 The Poset Cover Problem aims to find a minimum set of posets that cover a given input set of linear orders. 
